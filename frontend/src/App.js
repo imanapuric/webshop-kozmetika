@@ -1,17 +1,28 @@
-import ProizvodiLista from './components/ProizvodiLista';
-import DodajProizvod from './components/DodajProizvod';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import ProizvodiPage from "./pages/ProizvodiPage";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
     return (
-        <div style={{ padding: '20px' }}>
-            <h1>Web shop – kozmetika</h1>
+        <Router>
+            <Routes>
 
-            <DodajProizvod />
+                <Route path="/" element={<Navigate to="/login" />} />
 
-            <hr />
+                <Route path="/login" element={<LoginPage />} />
 
-            <ProizvodiLista />
-        </div>
+                <Route
+                    path="/proizvodi"
+                    element={
+                        <PrivateRoute>
+                            <ProizvodiPage />
+                        </PrivateRoute>
+                    }
+                />
+
+            </Routes>
+        </Router>
     );
 }
 

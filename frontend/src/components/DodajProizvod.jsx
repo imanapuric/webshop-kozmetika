@@ -1,61 +1,136 @@
-import { useEffect, useState } from 'react';
-import api from '../services/api';
+import { useEffect, useState } from "react";
+import api from "../services/api";
 
-const DodajProizvod = () => {
+const DodajProizvod = ({ selectedProizvod, refresh }) => {
+
     const [kategorije, setKategorije] = useState([]);
-    const [form, setForm] = useState({
-        naziv: '',
-        opis: '',
-        cijena: '',
-        kolicina: '',
-        kategorija_id: ''
+
+    const [formData, setFormData] = useState({
+        naziv: "",
+        opis: "",
+        cijena: "",
+        kolicina: "",
+        kategorija_id: ""
     });
 
+    // ✅ Učitavanje kategorija iz baze
     useEffect(() => {
-        api.get('/kategorije')
+        api.get("/kategorije")
             .then(res => setKategorije(res.data))
-            .catch(err => console.error(err));
+            .catch(err => console.error("Greška kod učitavanja kategorija:", err));
     }, []);
 
+    // ✅ Ako je kliknut "Izmijeni", popuni formu
+    useEffect(() => {
+        if (selectedProizvod) {
+            setFormData({
+                naziv: selectedProizvod.naziv || "",
+                opis: selectedProizvod.opis || "",
+                cijena: selectedProizvod.cijena || "",
+                kolicina: selectedProizvod.kolicina || "",
+                kategorija_id: selectedProizvod.kategorija_id || ""
+            });
+        }
+    }, [selectedProizvod]);
+
+    // ✅ Promjena inputa
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // ✅ Submit
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        api.post('/proizvodi', form)
-            .then(() => {
-                alert('Proizvod uspješno dodan');
-                setForm({
-                    naziv: '',
-                    opis: '',
-                    cijena: '',
-                    kolicina: '',
-                    kategorija_id: ''
-                });
-            })
-            .catch(err => console.error(err));
+        if (selectedProizvod) {
+            api.put(`/proizvodi/${selectedProizvod.id}`, formData)
+                .then(() => {
+                    alert("Proizvod ažuriran ✅");
+                    refresh();
+                })
+                .catch(err => console.error("Greška kod ažuriranja:", err));
+        } else {
+            api.post("/proizvodi", formData)
+                .then(() => {
+                    alert("Proizvod dodan ✅");
+                    refresh();
+                })
+                .catch(err => console.error("Greška kod dodavanja:", err));
+        }
+
+        // ✅ Reset forme
+        setFormData({
+            naziv: "",
+            opis: "",
+            cijena: "",
+            kolicina: "",
+            kategorija_id: ""
+        });
     };
 
     return (
         <div>
-            <h2>Dodaj proizvod</h2>
+            <h2>{selectedProizvod ? "Uredi proizvod" : "Dodaj proizvod"}</h2>
 
             <form onSubmit={handleSubmit}>
-                <input name="naziv" placeholder="Naziv" onChange={handleChange} /><br />
-                <input name="opis" placeholder="Opis" onChange={handleChange} /><br />
-                <input name="cijena" type="number" step="0.01" placeholder="Cijena" onChange={handleChange} /><br />
-                <input name="kolicina" type="number" placeholder="Količina" onChange={handleChange} /><br />
+                <input
+                    name="naziv"
+                    placeholder="Naziv"
+                    value={formData.naziv}
+                    onChange={handleChange}
+                    required
+                />
+                <br />
 
-                <select name="kategorija_id" onChange={handleChange}>
-                    <option value="">Odaberi kategoriju</option>
+                <input
+                    name="opis"
+                    placeholder="Opis"
+                    value={formData.opis}
+                    onChange={handleChange}
+                />
+                <br />
+
+                <input
+                    name="cijena"
+                    placeholder="Cijena"
+                    type="number"
+                    value={formData.cijena}
+                    onChange={handleChange}
+                    required
+                />
+                <br />
+
+                <input
+                    name="kolicina"
+                    placeholder="Količina"
+                    type="number"
+                    value={formData.kolicina}
+                    onChange={handleChange}
+                    required
+                />
+                <br />
+
+                {/* ✅ Dropdown sa nazivima kategorija */}
+                <select
+                    name="kategorija_id"
+                    value={formData.kategorija_id}
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">-- Izaberi kategoriju --</option>
+
                     {kategorije.map(k => (
-                        <option key={k.id} value={k.id}>{k.naziv}</option>
+                        <option key={k.id} value={k.id}>
+                            {k.naziv}
+                        </option>
                     ))}
-                </select><br /><br />
+                </select>
 
-                <button type="submit">Sačuvaj</button>
+                <br />
+
+                <button type="submit">
+                    {selectedProizvod ? "Sačuvaj izmjene" : "Dodaj"}
+                </button>
             </form>
         </div>
     );
