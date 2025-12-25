@@ -11,8 +11,13 @@ app.get('/api/test', (req, res) => {
     res.json({ poruka: 'Backend radi' });
 });
 
-// RUTE
+// ruta za kategorije
 const kategorijaRoutes = require('./routes/KategorijaRoutes');
 app.use('/api/kategorije', kategorijaRoutes);
+
+//ruta za proizvode
+const proizvodRoutes = require('./routes/ProizvodRoutes');
+app.use('/api/proizvodi', proizvodRoutes);
+
 
 module.exports = app;
