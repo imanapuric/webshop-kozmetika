@@ -27,3 +27,12 @@ exports.delete = (req, res) => {
         res.json({ poruka: 'Proizvod obrisan' });
     });
 };
+
+exports.getById = (req, res) => {
+    Proizvod.getById(req.params.id, (err, row) => {
+        if (err) return res.status(500).json(err);
+        if (!row) return res.status(404).json({ poruka: 'Proizvod nije pronađen' });
+        res.json(row);
+    });
+};
+

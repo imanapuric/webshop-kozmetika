@@ -10,6 +10,19 @@ const Proizvod = {
         db.query(sql, cb);
     },
 
+    getById: (id, cb) => {
+        const sql = `
+      SELECT p.*, k.naziv AS kategorija
+      FROM proizvodi p
+      JOIN kategorije k ON p.kategorija_id = k.id
+      WHERE p.id = ?
+    `;
+        db.query(sql, [id], (err, results) => {
+            if (err) return cb(err);
+            cb(null, results[0]);
+        });
+    },
+
     create: (data, cb) => {
         const sql = `
       INSERT INTO proizvodi (naziv, opis, cijena, kolicina, kategorija_id)
