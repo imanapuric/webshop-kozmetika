@@ -23,4 +23,8 @@ app.use("/api/proizvodi", proizvodRoutes);
 const authRoutes = require("./routes/AuthRoutes");
 app.use("/api/auth", authRoutes);
 
+const narudzbaRoutes = require("./routes/NarudzbaRoutes");
+app.use("/api/narudzbe", narudzbaRoutes);
+
+
 module.exports = app;

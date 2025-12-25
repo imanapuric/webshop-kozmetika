@@ -17,7 +17,7 @@ const LoginPage = () => {
         api.post("/auth/login", { email, lozinka })
             .then((res) => {
                 login(res.data.korisnik);
-                navigate("/proizvodi");
+                navigate("/dashboard");
             })
             .catch((err) => {
                 setError(err.response?.data?.poruka || "Greška pri loginu!");
