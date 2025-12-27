@@ -1,37 +1,35 @@
+/* ===============================
+   LOGIN PAGE LAYOUT
+================================ */
+
 .login-page {
-    position: relative;
-    overflow: hidden;
+    height: calc(100vh - 60px); /* visina bez navbar-a */
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    background: linear-gradient(135deg, #f8ecec, #fffafa);
+    overflow: hidden;
+    background: #fffafa;
 }
 
+/* ===============================
+   LIJEVA STRANA – CVIJET + TEKST
+================================ */
+
 .login-left {
-     padding: 90px;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-
-     background-image:
-             linear-gradient(
-                     rgba(248, 236, 236, 0.85),
-                     rgba(248, 236, 236, 0.85)
-             ),
-             url("../picture/flower.jpg");
-
-     background-repeat: no-repeat;
-     background-position: left center;
-     background-size: cover;
- }
-
-
-
-/* Lijeva strana */
-.login-left {
-    padding: 90px;
+    padding: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    background-image:
+            linear-gradient(
+                    rgba(248, 236, 236, 0.8),
+                    rgba(248, 236, 236, 0.95)
+            ),
+            url("../picture/flower.jpg");
+
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 75%;
 }
 
 .login-left h1 {
@@ -56,36 +54,45 @@
     line-height: 1.7;
 }
 
-/* Desna strana */
+/* ===============================
+   DESNA STRANA – PRIJAVA
+================================ */
+
 .login-right {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .login-card {
     background: #ffffff;
-    padding: 45px;
+    padding: 50px;
     width: 100%;
-    max-width: 400px;
-    border-radius: 14px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+    max-width: 420px;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(138, 95, 91, 0.15);
 }
 
 .login-card h2 {
-    margin-bottom: 25px;
-    font-size: 22px;
-    color: #2b2b2b;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #8a5f5b;
+    font-weight: 500;
 }
 
 .login-card input {
     width: 100%;
-    padding: 14px;
-    margin-bottom: 16px;
-    border: 1px solid #ead7d4;
-    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 18px;
+    border: 1px solid #ecd6d3;
+    border-radius: 10px;
     font-size: 14px;
     background-color: #fffafa;
+}
+
+.login-card input::placeholder {
+    color: #b8a2a0;
 }
 
 .login-card input:focus {
@@ -93,10 +100,13 @@
     border-color: #c7a6a1;
 }
 
-/* ROZE DUGME ✨ */
+/* ===============================
+   DUGME
+================================ */
+
 .login-card button {
     width: 100%;
-    padding: 14px;
+    padding: 15px;
     background: linear-gradient(135deg, #c7a6a1, #8a5f5b);
     color: white;
     border: none;
@@ -108,9 +118,13 @@
 }
 
 .login-card button:hover {
-    opacity: 0.9;
+    box-shadow: 0 10px 30px rgba(138, 95, 91, 0.35);
     transform: translateY(-1px);
 }
+
+/* ===============================
+   ERROR PORUKA
+================================ */
 
 .error {
     color: #b84a4a;
@@ -118,15 +132,20 @@
     font-size: 14px;
 }
 
-/* Responsive */
+/* ===============================
+   RESPONSIVE (MOBITEL)
+================================ */
+
 @media (max-width: 900px) {
     .login-page {
         grid-template-columns: 1fr;
+        height: calc(100vh - 60px);
     }
 
     .login-left {
-        padding: 50px;
-        text-align: center;
+        padding: 40px;
         align-items: center;
+        text-align: center;
+        background-image: none; /* bez cvijeta na mobitelu */
     }
 }
