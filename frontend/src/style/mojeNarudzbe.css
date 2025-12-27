@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');
+
+.moje-narudzbe {
+    padding: 24px;
+    height: 100vh;
+    background: linear-gradient(180deg,rgba(255, 250, 250, 1) 0%, rgba(226, 211, 210, 1) 59%, rgba(138, 95, 91, 1) 100%);
+    font-family: 'Lora', serif;
+}
+
+.moje-narudzbe h1 {
+    font-family: 'Playfair Display', serif;
+    color: #8a5f5b;
+}
+
+.moje-narudzbe .table {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.moje-narudzbe button {
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+

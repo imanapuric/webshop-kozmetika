@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 import DodajProizvod from './DodajProizvod';
+import '../style/dashboard.css';
 
 const ProizvodiLista = () => {
     const [proizvodi, setProizvodi] = useState([]);
@@ -29,7 +30,7 @@ const ProizvodiLista = () => {
     };
 
     return (
-        <div>
+        <div className="proizvodi-lista">
             {/* Forma za dodavanje/uređivanje */}
             <DodajProizvod selectedProizvod={selectedProizvod} refresh={fetchProizvodi} />
 
@@ -37,7 +38,7 @@ const ProizvodiLista = () => {
 
             <h2>Lista proizvoda</h2>
 
-            <table border="1" cellPadding="8">
+            <table className="table" border="1" cellPadding="8">
                 <thead>
                 <tr>
                     <th>Naziv</th>
@@ -57,14 +58,14 @@ const ProizvodiLista = () => {
                         <td>{p.kolicina}</td>
                         <td>
                             <button
-                                style={{ background: "orange", color: "white", border: "none", padding: "6px 10px", marginRight: "5px", cursor: "pointer" }}
+                                className="btn btn-edit"
                                 onClick={() => setSelectedProizvod(p)}
                             >
                                 Izmijeni
                             </button>
 
                             <button
-                                style={{ background: "red", color: "white", border: "none", padding: "6px 10px", cursor: "pointer" }}
+                                className="btn btn-delete"
                                 onClick={() => obrisiProizvod(p.id)}
                             >
                                 Obriši

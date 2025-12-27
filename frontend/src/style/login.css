@@ -45,11 +45,11 @@
 }
 
 .subtitle {
-    font-size: 20px;
+    font-size: 25px;
+    padding: 15px 0;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #c7a6a1;
-    margin-bottom: 30px;
     font-family: 'Playfair Display', serif;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .login-card input {
-    width: 100%;
+    width: 92%;
     padding: 15px;
     margin-bottom: 18px;
     border: 1px solid #ecd6d3;

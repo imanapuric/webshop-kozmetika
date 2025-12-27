@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import "../style/narudzbe.css";
 
 const Narudzbe = () => {
     const [narudzbe, setNarudzbe] = useState([]);
@@ -50,10 +51,10 @@ const Narudzbe = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
-            <h1>📦 Narudžbe (Admin)</h1>
+        <div className="narudzbe">
+            <h1>Narudžbe (Admin)</h1>
 
-            <table border="1" cellPadding="8" style={{ width: "100%", marginTop: "15px" }}>
+            <table className="table" cellPadding="8" style={{ width: "100%", marginTop: "15px" }}>
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -113,7 +114,7 @@ const Narudzbe = () => {
                 <>
                     <h2 style={{ marginTop: "30px" }}>Stavke narudžbe #{selectedId}</h2>
 
-                    <table border="1" cellPadding="8" style={{ width: "100%", marginTop: "10px" }}>
+                    <table className="table" cellPadding="8" style={{ width: "100%", marginTop: "10px" }}>
                         <thead>
                         <tr>
                             <th>Proizvod</th>

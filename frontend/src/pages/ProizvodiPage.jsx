@@ -1,6 +1,7 @@
 import ProizvodiLista from "../components/ProizvodiLista";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import "../style/proizvodiPage.css";
 
 const ProizvodiPage = () => {
     const { korisnik, logout } = useAuth();
@@ -12,9 +13,9 @@ const ProizvodiPage = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div className="proizvodi-page">
             <h1>Dobrodošla, {korisnik?.ime} 👋</h1>
-            <button onClick={handleLogout} style={{ marginBottom: "20px" }}>
+            <button onClick={handleLogout} className="logout-btn" style={{ marginBottom: "20px" }}>
                 Logout
             </button>
 

@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');
+
+.proizvodi-page {
+    padding: 24px;
+    font-family: 'Lora', serif;
+    background: #fffafa;
+}
+
+.proizvodi-page h1 {
+    font-family: 'Playfair Display', serif;
+    color: #8a5f5b;
+}
+
+.proizvodi-page .logout-btn {
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, #c7a6a1, #8a5f5b);
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+}
+
+.proizvodi-page .table { width: 100%; }
+

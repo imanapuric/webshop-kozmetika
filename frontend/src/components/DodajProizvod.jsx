@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import "../style/dashboard.css";
 
 const DodajProizvod = ({ selectedProizvod, refresh }) => {
 
@@ -69,10 +70,10 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
     };
 
     return (
-        <div>
+        <div className="dodaj-proizvod">
             <h2>{selectedProizvod ? "Uredi proizvod" : "Dodaj proizvod"}</h2>
 
-            <form onSubmit={handleSubmit}>
+            <form className="proizvod-form" onSubmit={handleSubmit}>
                 <input
                     name="naziv"
                     placeholder="Naziv"
@@ -128,7 +129,7 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
 
                 <br />
 
-                <button type="submit">
+                <button className="btn btn-primary" type="submit">
                     {selectedProizvod ? "Sačuvaj izmjene" : "Dodaj"}
                 </button>
             </form>

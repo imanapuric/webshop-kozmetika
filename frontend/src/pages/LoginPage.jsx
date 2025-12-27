@@ -33,12 +33,10 @@ const LoginPage = () => {
         <div className="login-page">
             <div className="login-left">
                 <h1 className="brand">Roséa</h1>
-                <p className="subtitle">BEAUTY ADMIN PANEL</p>
-
+                <p className="subtitle">Tamo gdje njega<br/>postaje ritual.</p>
                 <p className="description">
-                    Dobro došli!<br />
-                    Prijavite se kako biste upravljali proizvodima,
-                    narudžbama i sadržajem Roséa web prodavnice.
+                    Dobro došli u Roséa web prodavnicu!<br />
+                    Prijavite se kako biste otkrili naš svijet ljepote i nježnosti.
                 </p>
             </div>
 

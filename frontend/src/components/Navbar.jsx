@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import "../style/navbar.css"
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -15,59 +16,40 @@ const Navbar = () => {
         navigate("/login");
     };
 
-    const linkStyle = {
-        color: "#fff",
-        marginRight: "15px",
-        textDecoration: "none"
-    };
-
     return (
-        <div style={{
-            background: "#222",
-            color: "#fff",
-            padding: "15px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-        }}>
-            <h2 style={{ margin: 0 }}>Webshop</h2>
+        <div className="navbar">
+            <Link to="/" className="brand">Roséa</Link>
 
-            <div style={{ display: "flex", alignItems: "center" }}>
-                <Link style={linkStyle} to="/shop">Shop</Link>
+            <div className="nav-right">
+                <div className="nav-links">
 
-                <Link style={linkStyle} to="/korpa">
-                    Korpa ({brojArtikala})
-                </Link>
+                    {korisnik && korisnik.uloga === "ADMIN" && (
+                        <>
+                            <Link to="/dashboard">Dashboard</Link>
+                            <Link to="/narudzbe">Narudžbe</Link>
+                        </>
+                    )}
 
-                {korisnik && korisnik.uloga === "ADMIN" && (
-                    <>
-                        <Link style={linkStyle} to="/dashboard">Dashboard</Link>
-                        <Link style={linkStyle} to="/narudzbe">Narudžbe</Link>
-                    </>
-                )}
+                    {korisnik && korisnik.uloga === "KORISNIK" && (
+                        <>
+                            <Link to="/shop">Shop</Link>
+                            <Link to="/korpa">Korpa <span className="badge">{brojArtikala}</span></Link>
+                            <Link to="/moje-narudzbe">Moje narudžbe</Link>
+                        </>
+                    )}
 
-                {korisnik && korisnik.uloga === "CUSTOMER" && (
-                    <>
-                        <Link style={linkStyle} to="/moje-narudzbe">Moje narudžbe</Link>
-                    </>
-                )}
+                    {!korisnik && (
+                        <Link to="/login">Login</Link>
+                    )}
+                </div>
 
-                {korisnik ? (
+                {korisnik && (
                     <button
                         onClick={handleLogout}
-                        style={{
-                            background: "red",
-                            color: "white",
-                            border: "none",
-                            padding: "6px 12px",
-                            cursor: "pointer",
-                            borderRadius: "5px"
-                        }}
+                        className="btn"
                     >
                         Logout
                     </button>
-                ) : (
-                    <Link style={linkStyle} to="/login">Login</Link>
                 )}
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { useCart } from "../context/CartContext";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import "../style/checkout.css";
 
 const Checkout = () => {
     const { korpa, ocistiKorpu } = useCart();
@@ -43,13 +44,13 @@ const Checkout = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div className="checkout">
             <h1>Checkout</h1>
             <h2>Ukupno: {ukupno.toFixed(2)} KM</h2>
 
             <button
                 onClick={potvrdiNarudzbu}
-                style={{ background: "green", color: "white", padding: "10px" }}
+                className="confirm-btn"
             >
                 Potvrdi narudžbu
             </button>

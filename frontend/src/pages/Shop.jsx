@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import "../style/shop.css";
 
 const Shop = () => {
     const [proizvodi, setProizvodi] = useState([]);
@@ -14,24 +15,18 @@ const Shop = () => {
     }, []);
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div className="shop">
             <h1>Shop - Kozmetika</h1>
 
-            <Link to="/korpa">
-                <button style={{ marginBottom: "20px" }}>🛒 Idi u korpu</button>
-            </Link>
+            <div className="actions">
+                <Link to="/korpa">
+                    <button className="btn-secondary">🛒 Idi u korpu</button>
+                </Link>
+            </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+            <div className="product-grid">
                 {proizvodi.map((p) => (
-                    <div
-                        key={p.id}
-                        style={{
-                            border: "1px solid #ccc",
-                            borderRadius: "10px",
-                            padding: "15px",
-                            boxShadow: "2px 2px 10px rgba(0,0,0,0.1)"
-                        }}
-                    >
+                    <div key={p.id} className="product-card">
                         <h3>{p.naziv}</h3>
                         <p>{p.opis}</p>
                         <p><b>{p.cijena} KM</b></p>
@@ -39,7 +34,7 @@ const Shop = () => {
 
                         <button
                             onClick={() => dodajUKorpu(p)}
-                            style={{ background: "green", color: "white", border: "none", padding: "8px 12px" }}
+                            className="btn-primary"
                         >
                             Dodaj u korpu
                         </button>

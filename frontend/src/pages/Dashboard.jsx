@@ -1,28 +1,14 @@
 import ProizvodiLista from "../components/ProizvodiLista";
-import { Link } from "react-router-dom";
+import "../style/dashboard.css";
 
 const Dashboard = () => {
     const korisnik = JSON.parse(localStorage.getItem("korisnik"));
 
-    const handleLogout = () => {
-        localStorage.removeItem("korisnik");
-        window.location.href = "/login";
-    };
-
     return (
-        <div style={{ padding: "20px" }}>
-            <h2>Dobrodošla, {korisnik?.ime} 👋</h2>
+        <div className="dashboard">
+            <h2 className="dashboard-title">Dobrodošla, {korisnik?.ime} 👋</h2>
 
-            <div style={{ marginBottom: "20px" }}>
-                <button onClick={handleLogout}>Logout</button>
-
-                <Link to="/narudzbe">
-                    <button style={{ marginLeft: "10px" }}>Narudžbe</button>
-                </Link>
-
-                <Link to="/shop">
-                    <button style={{ marginLeft: "10px" }}>Shop</button>
-                </Link>
+            <div className="dashboard-controls" style={{ marginBottom: "20px" }}>
             </div>
 
             <ProizvodiLista />
