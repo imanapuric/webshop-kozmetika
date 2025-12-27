@@ -16,7 +16,6 @@ import PrivateRoute from "./routes/PrivateRoute";
 function App() {
     return (
         <Router>
-            {/* ✅ Navbar uvijek vidljiv */}
             <Navbar />
 
             <Routes>
@@ -30,7 +29,7 @@ function App() {
                 <Route
                     path="/dashboard"
                     element={
-                        <PrivateRoute>
+                        <PrivateRoute adminOnly={true}>
                             <Dashboard />
                         </PrivateRoute>
                     }
@@ -45,15 +44,16 @@ function App() {
                 {/* checkout */}
                 <Route path="/checkout" element={<Checkout />} />
 
-                {/* narudzbe */}
+                {/* sve narudzbe vidi samo admin */}
                 <Route
                     path="/narudzbe"
                     element={
-                        <PrivateRoute>
+                        <PrivateRoute adminOnly={true}>
                             <Narudzbe />
                         </PrivateRoute>
                     }
                 />
+
                 <Route
                     path="/moje-narudzbe"
                     element={

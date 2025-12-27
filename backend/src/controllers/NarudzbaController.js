@@ -1,43 +1,85 @@
 const Narudzba = require("../models/NarudzbaModel");
 
-// ✅ Admin: lista svih narudžbi
+/**
+ * ============================
+ * ADMIN – sve narudžbe
+ * ============================
+ * GET /api/narudzbe?uloga=ADMIN
+ */
 exports.getAll = (req, res) => {
+    const { uloga } = req.query;
+
+    if (uloga !== "ADMIN") {
+        return res.status(403).json({ poruka: "Zabranjen pristup!" });
+    }
+
     Narudzba.getAll((err, rows) => {
-        if (err) return res.status(500).json(err);
+        if (err) {
+            return res.status(500).json({ poruka: "Greška pri dohvaćanju narudžbi" });
+        }
         res.json(rows);
     });
 };
 
-// ✅ Korisnik: moje narudžbe
+/**
+ * ============================
+ * USER / ADMIN – moje narudžbe
+ * ============================
+ * GET /api/narudzbe/moje?korisnik_id=1
+ */
 exports.getMoje = (req, res) => {
-    const korisnik_id = req.params.korisnik_id;
+    const { korisnik_id } = req.query;
+
+    if (!korisnik_id) {
+        return res.status(400).json({ poruka: "Korisnik nije definisan!" });
+    }
 
     Narudzba.getByKorisnik(korisnik_id, (err, rows) => {
-        if (err) return res.status(500).json(err);
+        if (err) {
+            return res.status(500).json({ poruka: "Greška pri dohvaćanju narudžbi" });
+        }
         res.json(rows);
     });
 };
 
-// ✅ Stavke narudžbe (detalji)
+/**
+ * ============================
+ * USER / ADMIN – stavke narudžbe
+ * ============================
+ * GET /api/narudzbe/:id/stavke
+ */
 exports.getStavke = (req, res) => {
     const narudzba_id = req.params.id;
 
+    if (!narudzba_id) {
+        return res.status(400).json({ poruka: "Narudžba nije definisana!" });
+    }
+
     Narudzba.getStavke(narudzba_id, (err, rows) => {
-        if (err) return res.status(500).json(err);
+        if (err) {
+            return res.status(500).json({ poruka: "Greška pri dohvaćanju stavki" });
+        }
         res.json(rows);
     });
 };
 
-// ✅ POST - kreiranje narudžbe + stavke
+/**
+ * ============================
+ * USER – kreiranje narudžbe
+ * ============================
+ * POST /api/narudzbe
+ */
 exports.create = (req, res) => {
     const { korisnik_id, ukupno, stavke } = req.body;
 
-    if (!korisnik_id || !ukupno || !stavke || stavke.length === 0) {
+    if (!korisnik_id || !ukupno || !Array.isArray(stavke) || stavke.length === 0) {
         return res.status(400).json({ poruka: "Podaci nisu kompletni!" });
     }
 
     Narudzba.create(korisnik_id, ukupno, stavke, (err, result) => {
-        if (err) return res.status(500).json(err);
+        if (err) {
+            return res.status(500).json({ poruka: "Greška pri kreiranju narudžbe" });
+        }
 
         res.json({
             poruka: "Narudžba uspješno kreirana ✅",
@@ -45,19 +87,31 @@ exports.create = (req, res) => {
         });
     });
 };
-// ✅ PUT - promjena statusa
+
+/**
+ * ============================
+ * ADMIN – promjena statusa
+ * ============================
+ * PUT /api/narudzbe/:id
+ * body: { status, uloga }
+ */
 exports.updateStatus = (req, res) => {
     const narudzba_id = req.params.id;
-    const { status } = req.body;
+    const { status, uloga } = req.body;
+
+    if (uloga !== "ADMIN") {
+        return res.status(403).json({ poruka: "Samo admin može mijenjati status!" });
+    }
 
     if (!status) {
         return res.status(400).json({ poruka: "Status je obavezan!" });
     }
 
-    Narudzba.updateStatus(narudzba_id, status, (err, result) => {
-        if (err) return res.status(500).json(err);
+    Narudzba.updateStatus(narudzba_id, status, (err) => {
+        if (err) {
+            return res.status(500).json({ poruka: "Greška pri ažuriranju statusa" });
+        }
 
         res.json({ poruka: "Status ažuriran ✅" });
     });
 };
-

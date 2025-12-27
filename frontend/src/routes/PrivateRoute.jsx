@@ -1,9 +1,20 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-const PrivateRoute = ({ children }) => {
+const PrivateRoute = ({ children, adminOnly = false }) => {
     const { korisnik } = useAuth();
-    return korisnik ? children : <Navigate to="/login" />;
+
+    // nije ulogovan
+    if (!korisnik) {
+        return <Navigate to="/login" />;
+    }
+
+    // samo admin smije
+    if (adminOnly && korisnik.uloga !== "ADMIN") {
+        return <Navigate to="/shop" />;
+    }
+
+    return children;
 };
 
 export default PrivateRoute;

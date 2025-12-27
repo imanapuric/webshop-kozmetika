@@ -8,7 +8,9 @@ exports.login = (req, res) => {
     }
 
     Korisnik.findByEmail(email, (err, rows) => {
-        if (err) return res.status(500).json(err);
+        if (err) {
+            return res.status(500).json({ poruka: "Greška na serveru" });
+        }
 
         if (rows.length === 0) {
             return res.status(401).json({ poruka: "Korisnik ne postoji!" });
@@ -16,19 +18,19 @@ exports.login = (req, res) => {
 
         const korisnik = rows[0];
 
-        // provjera lozinke (za sada plain text)
+        // obična provjera lozinke
         if (korisnik.lozinka !== lozinka) {
             return res.status(401).json({ poruka: "Pogrešna lozinka!" });
         }
 
-        // ako je login uspješan - vrati korisnika bez lozinke
+        // LOGIN USPJEŠAN
         res.json({
             poruka: "Login uspješan ✅",
             korisnik: {
                 id: korisnik.id,
                 ime: korisnik.ime,
-                prezime: korisnik.prezime,
-                email: korisnik.email
+                email: korisnik.email,
+                uloga: korisnik.uloga   // 🔑 KLJUČNO
             }
         });
     });

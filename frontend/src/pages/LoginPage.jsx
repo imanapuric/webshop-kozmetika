@@ -16,13 +16,22 @@ const LoginPage = () => {
 
         api.post("/auth/login", { email, lozinka })
             .then((res) => {
-                login(res.data.korisnik);
-                navigate("/dashboard");
+                const korisnik = res.data.korisnik;
+
+                login(korisnik);
+
+                // RAZLIKA ADMIN / USER
+                if (korisnik.uloga === "ADMIN") {
+                    navigate("/dashboard");
+                } else {
+                    navigate("/shop"); // ili /profil
+                }
             })
             .catch((err) => {
                 setError(err.response?.data?.poruka || "Greška pri loginu!");
             });
     };
+
 
     return (
         <div style={{ padding: "20px" }}>
