@@ -3,7 +3,6 @@ import api from "../services/api";
 import "../style/dashboard.css";
 
 const DodajProizvod = ({ selectedProizvod, refresh }) => {
-
     const [kategorije, setKategorije] = useState([]);
 
     const [formData, setFormData] = useState({
@@ -14,14 +13,12 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
         kategorija_id: ""
     });
 
-    // ✅ Učitavanje kategorija iz baze
     useEffect(() => {
         api.get("/kategorije")
             .then(res => setKategorije(res.data))
-            .catch(err => console.error("Greška kod učitavanja kategorija:", err));
+            .catch(err => console.error(err));
     }, []);
 
-    // ✅ Ako je kliknut "Izmijeni", popuni formu
     useEffect(() => {
         if (selectedProizvod) {
             setFormData({
@@ -34,104 +31,111 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
         }
     }, [selectedProizvod]);
 
-    // ✅ Promjena inputa
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // ✅ Submit
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (selectedProizvod) {
-            api.put(`/proizvodi/${selectedProizvod.id}`, formData)
-                .then(() => {
-                    alert("Proizvod ažuriran ✅");
-                    refresh();
-                })
-                .catch(err => console.error("Greška kod ažuriranja:", err));
-        } else {
-            api.post("/proizvodi", formData)
-                .then(() => {
-                    alert("Proizvod dodan ✅");
-                    refresh();
-                })
-                .catch(err => console.error("Greška kod dodavanja:", err));
-        }
+        const request = selectedProizvod
+            ? api.put(`/proizvodi/${selectedProizvod.id}`, formData)
+            : api.post("/proizvodi", formData);
 
-        // ✅ Reset forme
-        setFormData({
-            naziv: "",
-            opis: "",
-            cijena: "",
-            kolicina: "",
-            kategorija_id: ""
-        });
+        request
+            .then(() => {
+                refresh();
+                setFormData({
+                    naziv: "",
+                    opis: "",
+                    cijena: "",
+                    kolicina: "",
+                    kategorija_id: ""
+                });
+            })
+            .catch(err => console.error(err));
     };
 
     return (
-        <div className="dodaj-proizvod">
-            <h2>{selectedProizvod ? "Uredi proizvod" : "Dodaj proizvod"}</h2>
+        <div className="dashboard-card form-card">
+            <h2 className="form-title">
+                {selectedProizvod ? "Uredi proizvod" : "Dodaj novi proizvod"}
+            </h2>
 
             <form className="proizvod-form" onSubmit={handleSubmit}>
-                <input
-                    name="naziv"
-                    placeholder="Naziv"
-                    value={formData.naziv}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
 
-                <input
-                    name="opis"
-                    placeholder="Opis"
-                    value={formData.opis}
-                    onChange={handleChange}
-                />
-                <br />
+                <div className="form-group">
+                    <label className="form-label">Naziv</label>
+                    <input
+                        className="form-input"
+                        name="naziv"
+                        placeholder="Unesite naziv proizvoda"
+                        value={formData.naziv}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-                <input
-                    name="cijena"
-                    placeholder="Cijena"
-                    type="number"
-                    value={formData.cijena}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
+                <div className="form-group">
+                    <label className="form-label">Cijena (KM)</label>
+                    <input
+                        className="form-input"
+                        type="number"
+                        name="cijena"
+                        placeholder="0.00"
+                        value={formData.cijena}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-                <input
-                    name="kolicina"
-                    placeholder="Količina"
-                    type="number"
-                    value={formData.kolicina}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
+                <div className="form-group full-width">
+                    <label className="form-label">Opis</label>
+                    <textarea
+                        className="form-textarea"
+                        name="opis"
+                        placeholder="Unesite opis proizvoda"
+                        value={formData.opis}
+                        onChange={handleChange}
+                    />
+                </div>
 
-                {/* ✅ Dropdown sa nazivima kategorija */}
-                <select
-                    name="kategorija_id"
-                    value={formData.kategorija_id}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">-- Izaberi kategoriju --</option>
+                <div className="form-group">
+                    <label className="form-label">Količina</label>
+                    <input
+                        className="form-input"
+                        type="number"
+                        name="kolicina"
+                        placeholder="0"
+                        value={formData.kolicina}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-                    {kategorije.map(k => (
-                        <option key={k.id} value={k.id}>
-                            {k.naziv}
-                        </option>
-                    ))}
-                </select>
+                <div className="form-group">
+                    <label className="form-label">Kategorija</label>
+                    <select
+                        className="form-select"
+                        name="kategorija_id"
+                        value={formData.kategorija_id}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value=""> Izaberi kategoriju </option>
+                        {kategorije.map(k => (
+                            <option key={k.id} value={k.id}>
+                                {k.naziv}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-                <br />
-
-                <button className="btn btn-primary" type="submit">
-                    {selectedProizvod ? "Sačuvaj izmjene" : "Dodaj"}
-                </button>
+                <div className="form-actions full-width">
+                    <button type="submit" className="btn-submit">
+                        {selectedProizvod ? "Sačuvaj izmjene " : "Dodaj proizvod "}
+                    </button>
+                </div>
             </form>
         </div>
     );

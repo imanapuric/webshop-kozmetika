@@ -6,9 +6,14 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <h2 className="dashboard-title">Dobrodošla, {korisnik?.ime} 👋</h2>
-
-            <div className="dashboard-controls" style={{ marginBottom: "20px" }}>
+            <div className="dashboard-header">
+                <h1 className="dashboard-brand">Roséa</h1>
+                <p className="dashboard-tagline">
+                    Tamo gdje njega postaje ritual
+                </p>
+                <h2 className="dashboard-title">
+                    Dobrodošla, {korisnik?.ime}
+                </h2>
             </div>
 
             <ProizvodiLista />

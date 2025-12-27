@@ -14,7 +14,7 @@
 }
 
 /* ===============================
-   LIJEVA STRANA - CVIJET + TEKST
+   LIJEVA STRANA – CVIJET + TEKST
 ================================ */
 
 .login-left {
@@ -61,7 +61,7 @@
 }
 
 /* ===============================
-   DESNA STRANA – PRIJAVA
+   DESNA STRANA – PRIJAVA (DOTJERANO)
 ================================ */
 
 .login-right {
@@ -71,65 +71,79 @@
     height: 100%;
 }
 
+/* kartica – mekša, luksuznija */
 .login-card {
-    background: #ffffff;
-    padding: 50px;
+    background: linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fffafa 100%
+    );
+    padding: 55px;
     width: 100%;
     max-width: 420px;
-    border-radius: 20px;
-    box-shadow: 0 30px 80px rgba(138, 95, 91, 0.15);
+    border-radius: 28px;
+    box-shadow:
+            0 40px 90px rgba(138, 95, 91, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
+/* naslov */
 .login-card h2,
 .card-title {
-    margin-bottom: 30px;
-    font-size: 24px;
+    margin-bottom: 35px;
+    font-size: 26px;
     color: #8a5f5b;
-    font-weight: 500;
+    font-weight: 600;
     font-family: 'Playfair Display', serif;
+    text-align: center;
 }
 
+/* inputi – elegantniji */
 .login-card input {
-    width: 92%;
-    padding: 15px;
-    margin-bottom: 18px;
-    border: 1px solid #ecd6d3;
-    border-radius: 10px;
+    width: 100%;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    border: 1px solid #ead6d3;
+    border-radius: 14px;
     font-size: 14px;
     background-color: #fffafa;
-    font-family: inherit; /* keep Lora */
+    font-family: inherit;
+    transition: all 0.25s ease;
 }
 
 .login-card input::placeholder {
-    color: #b8a2a0;
+    color: #bfa8a5;
 }
 
 .login-card input:focus {
     outline: none;
     border-color: #c7a6a1;
+    box-shadow: 0 0 0 4px rgba(199, 166, 161, 0.18);
 }
 
 /* ===============================
-   DUGME
+   DUGME – ROSÉA POTPIS
 ================================ */
 
 .login-card button {
     width: 100%;
-    padding: 15px;
+    padding: 16px;
+    margin-top: 10px;
     background: linear-gradient(135deg, #c7a6a1, #8a5f5b);
     color: white;
     border: none;
     border-radius: 999px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
     font-family: 'Lora', serif;
+    letter-spacing: 0.5px;
 }
 
 .login-card button:hover {
-    box-shadow: 0 10px 30px rgba(138, 95, 91, 0.35);
-    transform: translateY(-1px);
+    box-shadow: 0 18px 45px rgba(138, 95, 91, 0.35);
+    transform: translateY(-2px);
 }
 
 /* ===============================
@@ -138,8 +152,9 @@
 
 .error {
     color: #b84a4a;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     font-size: 14px;
+    text-align: center;
 }
 
 /* ===============================
@@ -156,6 +171,6 @@
         padding: 40px;
         align-items: center;
         text-align: center;
-        background-image: none; /* bez cvijeta na mobitelu */
+        background-image: none;
     }
 }
