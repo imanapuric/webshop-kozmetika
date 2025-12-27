@@ -1,16 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const korisnik = JSON.parse(localStorage.getItem("korisnik"));
+    const { korisnik, logout } = useAuth();
 
     const { korpa } = useCart();
 
     const brojArtikala = korpa.reduce((sum, p) => sum + p.kolicinaUKorpi, 0);
 
     const handleLogout = () => {
-        localStorage.removeItem("korisnik");
+        logout();
         navigate("/login");
     };
 
@@ -38,29 +39,34 @@ const Navbar = () => {
                     Korpa ({brojArtikala})
                 </Link>
 
-                {korisnik && (
+                {korisnik && korisnik.uloga === "ADMIN" && (
                     <>
                         <Link style={linkStyle} to="/dashboard">Dashboard</Link>
                         <Link style={linkStyle} to="/narudzbe">Narudžbe</Link>
-                        <Link style={linkStyle} to="/moje-narudzbe">Moje narudžbe</Link>
-
-                        <button
-                            onClick={handleLogout}
-                            style={{
-                                background: "red",
-                                color: "white",
-                                border: "none",
-                                padding: "6px 12px",
-                                cursor: "pointer",
-                                borderRadius: "5px"
-                            }}
-                        >
-                            Logout
-                        </button>
                     </>
                 )}
 
-                {!korisnik && (
+                {korisnik && korisnik.uloga === "CUSTOMER" && (
+                    <>
+                        <Link style={linkStyle} to="/moje-narudzbe">Moje narudžbe</Link>
+                    </>
+                )}
+
+                {korisnik ? (
+                    <button
+                        onClick={handleLogout}
+                        style={{
+                            background: "red",
+                            color: "white",
+                            border: "none",
+                            padding: "6px 12px",
+                            cursor: "pointer",
+                            borderRadius: "5px"
+                        }}
+                    >
+                        Logout
+                    </button>
+                ) : (
                     <Link style={linkStyle} to="/login">Login</Link>
                 )}
             </div>

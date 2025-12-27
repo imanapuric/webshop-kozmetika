@@ -18,7 +18,10 @@ const LoginPage = () => {
         api.post("/auth/login", { email, lozinka })
             .then((res) => {
                 login(res.data.korisnik);
-                navigate("/dashboard");
+                // redirekcija na osnovu uloge
+                const role = res.data.korisnik?.uloga?.toUpperCase();
+                if (role === "ADMIN") navigate("/dashboard");
+                else navigate("/shop");
             })
             .catch((err) => {
                 setError(err.response?.data?.poruka || "Greška pri prijavi");
@@ -26,21 +29,22 @@ const LoginPage = () => {
     };
 
     return (
+
         <div className="login-page">
             <div className="login-left">
-                <h1>Roséa</h1>
+                <h1 className="brand">Roséa</h1>
                 <p className="subtitle">BEAUTY ADMIN PANEL</p>
 
                 <p className="description">
                     Dobro došli!<br />
                     Prijavite se kako biste upravljali proizvodima,
-                    narudžbama i sadržajem Roséa web peodavnice.
+                    narudžbama i sadržajem Roséa web prodavnice.
                 </p>
             </div>
 
             <div className="login-right">
                 <div className="login-card">
-                    <h2>Prijava</h2>
+                    <h2 className="card-title">Prijava</h2>
 
                     {error && <p className="error">{error}</p>}
 
@@ -66,7 +70,8 @@ const LoginPage = () => {
                 </div>
             </div>
         </div>
-    );
+
+);
 };
 
 export default LoginPage;

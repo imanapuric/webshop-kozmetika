@@ -1,17 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');
+
 /* ===============================
    LOGIN PAGE LAYOUT
 ================================ */
 
 .login-page {
-    height: calc(100vh - 60px); /* visina bez navbar-a */
+    height: 100vh;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     overflow: hidden;
     background: #fffafa;
+    font-family: 'Lora', serif;
 }
 
 /* ===============================
-   LIJEVA STRANA – CVIJET + TEKST
+   LIJEVA STRANA - CVIJET + TEKST
 ================================ */
 
 .login-left {
@@ -22,7 +25,7 @@
 
     background-image:
             linear-gradient(
-                    rgba(248, 236, 236, 0.8),
+                    rgba(248, 236, 236, 0.55),
                     rgba(248, 236, 236, 0.95)
             ),
             url("../picture/flower.jpg");
@@ -32,19 +35,22 @@
     background-size: 75%;
 }
 
-.login-left h1 {
-    font-size: 56px;
-    font-weight: 600;
+.login-left h1,
+.brand {
+    font-size: 100px;
+    font-weight: 900;
     color: #8a5f5b;
     letter-spacing: 1px;
+    font-family: 'Playfair Display', serif;
 }
 
 .subtitle {
-    font-size: 14px;
+    font-size: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #c7a6a1;
     margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
 }
 
 .description {
@@ -74,11 +80,13 @@
     box-shadow: 0 30px 80px rgba(138, 95, 91, 0.15);
 }
 
-.login-card h2 {
+.login-card h2,
+.card-title {
     margin-bottom: 30px;
     font-size: 24px;
     color: #8a5f5b;
     font-weight: 500;
+    font-family: 'Playfair Display', serif;
 }
 
 .login-card input {
@@ -89,6 +97,7 @@
     border-radius: 10px;
     font-size: 14px;
     background-color: #fffafa;
+    font-family: inherit; /* keep Lora */
 }
 
 .login-card input::placeholder {
@@ -115,6 +124,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: 'Lora', serif;
 }
 
 .login-card button:hover {

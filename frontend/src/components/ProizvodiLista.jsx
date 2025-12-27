@@ -22,7 +22,7 @@ const ProizvodiLista = () => {
 
         api.delete(`/proizvodi/${id}`)
             .then(() => {
-                alert("Proizvod obrisan ✅");
+                alert("Proizvod obrisan!");
                 fetchProizvodi();
             })
             .catch(err => console.error(err));

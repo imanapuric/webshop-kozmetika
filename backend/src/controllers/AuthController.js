@@ -25,12 +25,12 @@ exports.login = (req, res) => {
 
         // LOGIN USPJEŠAN
         res.json({
-            poruka: "Login uspješan ✅",
+            poruka: "Uspješna prijava!",
             korisnik: {
                 id: korisnik.id,
                 ime: korisnik.ime,
                 email: korisnik.email,
-                uloga: korisnik.uloga   // 🔑 KLJUČNO
+                uloga: korisnik.uloga
             }
         });
     });

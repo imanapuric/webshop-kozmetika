@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 
@@ -13,10 +13,13 @@ import MojeNarudzbe from "./pages/MojeNarudzbe";
 
 import PrivateRoute from "./routes/PrivateRoute";
 
-function App() {
+function AppContent() {
+    const location = useLocation();
+
     return (
-        <Router>
-            <Navbar />
+        <>
+            {/*sakrivanje header-a u login page jer nije potreban*/}
+            {location.pathname !== "/login" && <Navbar />}
 
             <Routes>
                 {/* redirect */}
@@ -25,7 +28,7 @@ function App() {
                 {/* login */}
                 <Route path="/login" element={<LoginPage />} />
 
-                {/* dashboard (CRUD) */}
+                {/* adminov dashboard (CRUD) */}
                 <Route
                     path="/dashboard"
                     element={
@@ -66,6 +69,14 @@ function App() {
                 {/* fallback */}
                 <Route path="*" element={<h2 style={{ padding: "20px" }}>404 - Nema stranice</h2>} />
             </Routes>
+        </>
+    );
+}
+
+function App() {
+    return (
+        <Router>
+            <AppContent />
         </Router>
     );
 }

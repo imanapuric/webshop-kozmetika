@@ -7,10 +7,17 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const storedUser = localStorage.getItem("korisnik");
-        if (storedUser) setKorisnik(JSON.parse(storedUser));
+        if (storedUser) {
+            const parsed = JSON.parse(storedUser);
+            // parsiranje role u uppercase
+            if (parsed.uloga) parsed.uloga = parsed.uloga.toUpperCase();
+            setKorisnik(parsed);
+        }
     }, []);
 
     const login = (userData) => {
+        // normalize role
+        if (userData.uloga) userData.uloga = userData.uloga.toUpperCase();
         setKorisnik(userData);
         localStorage.setItem("korisnik", JSON.stringify(userData));
     };
