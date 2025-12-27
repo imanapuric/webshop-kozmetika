@@ -1,0 +1,132 @@
+.login-page {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    background: linear-gradient(135deg, #f8ecec, #fffafa);
+}
+
+.login-left {
+     padding: 90px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+
+     background-image:
+             linear-gradient(
+                     rgba(248, 236, 236, 0.85),
+                     rgba(248, 236, 236, 0.85)
+             ),
+             url("../picture/flower.jpg");
+
+     background-repeat: no-repeat;
+     background-position: left center;
+     background-size: cover;
+ }
+
+
+
+/* Lijeva strana */
+.login-left {
+    padding: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-left h1 {
+    font-size: 56px;
+    font-weight: 600;
+    color: #8a5f5b;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #c7a6a1;
+    margin-bottom: 30px;
+}
+
+.description {
+    font-size: 16px;
+    color: #6f5b57;
+    max-width: 420px;
+    line-height: 1.7;
+}
+
+/* Desna strana */
+.login-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background: #ffffff;
+    padding: 45px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 14px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+}
+
+.login-card h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    color: #2b2b2b;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 16px;
+    border: 1px solid #ead7d4;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fffafa;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: #c7a6a1;
+}
+
+/* ROZE DUGME ✨ */
+.login-card button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #c7a6a1, #8a5f5b);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-card button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.error {
+    color: #b84a4a;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-left {
+        padding: 50px;
+        text-align: center;
+        align-items: center;
+    }
+}

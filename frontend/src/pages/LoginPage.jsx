@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import "../style/login.css";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -16,47 +17,54 @@ const LoginPage = () => {
 
         api.post("/auth/login", { email, lozinka })
             .then((res) => {
-                const korisnik = res.data.korisnik;
-
-                login(korisnik);
-
-                // RAZLIKA ADMIN / USER
-                if (korisnik.uloga === "ADMIN") {
-                    navigate("/dashboard");
-                } else {
-                    navigate("/shop"); // ili /profil
-                }
+                login(res.data.korisnik);
+                navigate("/dashboard");
             })
             .catch((err) => {
-                setError(err.response?.data?.poruka || "Greška pri loginu!");
+                setError(err.response?.data?.poruka || "Greška pri prijavi");
             });
     };
 
-
     return (
-        <div style={{ padding: "20px" }}>
-            <h2>Prijava</h2>
+        <div className="login-page">
+            <div className="login-left">
+                <h1>Roséa</h1>
+                <p className="subtitle">BEAUTY ADMIN PANEL</p>
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+                <p className="description">
+                    Dobro došli!<br />
+                    Prijavite se kako biste upravljali proizvodima,
+                    narudžbama i sadržajem Roséa web peodavnice.
+                </p>
+            </div>
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                /><br />
+            <div className="login-right">
+                <div className="login-card">
+                    <h2>Prijava</h2>
 
-                <input
-                    type="password"
-                    placeholder="Lozinka"
-                    value={lozinka}
-                    onChange={(e) => setLozinka(e.target.value)}
-                    required
-                /><br />
+                    {error && <p className="error">{error}</p>}
 
-                <button type="submit">Login</button>
-            </form>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+
+                        <input
+                            type="password"
+                            placeholder="Lozinka"
+                            value={lozinka}
+                            onChange={(e) => setLozinka(e.target.value)}
+                            required
+                        />
+
+                        <button type="submit">Prijavi se</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };
