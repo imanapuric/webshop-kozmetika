@@ -16,30 +16,56 @@ const Shop = () => {
 
     return (
         <div className="shop">
-            <h1>Shop - Kozmetika</h1>
 
-            <div className="actions">
-                <Link to="/korpa">
-                    <button className="btn-secondary">🛒 Idi u korpu</button>
-                </Link>
-            </div>
+            {/* ===== HERO SECTION ===== */}
+            <section className="shop-hero">
+                <div className="hero-overlay">
+                    <h1>Prirodna njega, bez kompromisa</h1>
+                    <p>Pažljivo odabrani proizvodi za svakodnevni ritual ljepote.</p>
 
-            <div className="product-grid">
-                {proizvodi.map((p) => (
-                    <div key={p.id} className="product-card">
-                        <h3>{p.naziv}</h3>
-                        <p>{p.opis}</p>
-                        <p><b>{p.cijena} KM</b></p>
-                        <p>Kategorija: {p.kategorija}</p>
-
-                        <button
-                            onClick={() => dodajUKorpu(p)}
-                            className="btn-primary"
-                        >
-                            Dodaj u korpu
+                    <Link to="/korpa">
+                        <button className="hero-btn">
+                            Pogledaj korpu
                         </button>
-                    </div>
-                ))}
+                    </Link>
+                </div>
+            </section>
+
+            <div className="products-section">
+                <h2 className="section-title">Naši proizvodi</h2>
+
+                <div className="product-grid">
+                    {proizvodi.map((p) => (
+                        <div key={p.id} className="product-card">
+
+                            {/* IMAGE */}
+                            <div className="product-image">
+                                <img
+                                    src="/placeholder-product.jpg"
+                                    alt={p.naziv}
+                                />
+                            </div>
+
+                            {/* CONTENT */}
+                            <div className="product-content">
+                                <h3>{p.naziv}</h3>
+                                <p className="product-desc">{p.opis}</p>
+
+                                <div className="product-footer">
+                                    <span className="price">{p.cijena} KM</span>
+
+                                    <button
+                                        onClick={() => dodajUKorpu(p)}
+                                        className="btn-add"
+                                    >
+                                        Dodaj u korpu
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

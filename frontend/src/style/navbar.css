@@ -1,88 +1,146 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');
 
+:root {
+    --nav-bg-dark: #4a2f2c;     /* tamna mocha */
+    --nav-bg-light: #5f3f3c;    /* rose-brown */
+    --nav-text: #f7f3f2;        /* soft white */
+    --nav-muted: #d6bcbc;       /* muted rose */
+    --nav-hover: #f0d7d4;
+}
+
+/* ===============================
+   NAVBAR BASE
+================================ */
+
 .navbar {
-    background: #8a5f5b;
-    color: #fff;
-    padding: 12px 18px;
+    background: linear-gradient(
+            180deg,
+            var(--nav-bg-light) 0%,
+            var(--nav-bg-dark) 100%
+    );
+    color: var(--nav-text);
+    padding: 14px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    box-sizing: border-box;
     font-family: 'Lora', serif;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
+
+/* ===============================
+   BRAND / LOGO
+================================ */
 
 .navbar .brand {
     font-family: 'Playfair Display', serif;
-    color: #fff;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.6px;
+    color: var(--nav-text);
     text-decoration: none;
 }
 
-.navbar .nav-links {
+/* ===============================
+   RIGHT SIDE
+================================ */
+
+.nav-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 26px;
 }
 
-.navbar .nav-links a {
-    color: #fff;
+/* ===============================
+   NAV LINKS
+================================ */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* link wrapper (ikonica + tekst) */
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--nav-text);
     text-decoration: none;
-    margin-right: 12px;
-    transition: color 0.15s ease, opacity 0.15s ease;
     font-size: 14px;
+    letter-spacing: 0.4px;
+    opacity: 0.85;
+    transition: all 0.2s ease;
 }
 
-.navbar .nav-links a:hover {
-    color: #c7a6a1; /* accent from login */
+/* ikonice */
+.nav-link svg {
+    font-size: 16px;
 }
 
-.navbar .badge {
-    background: #c7a6a1;
-    color: #222;
-    font-weight: 600;
+/* hover */
+.nav-link:hover {
+    color: var(--nav-hover);
+    opacity: 1;
+}
+
+/* ===============================
+   BADGE (KORPA)
+================================ */
+
+.badge {
+    background: var(--nav-muted);
+    color: #3b2523;
     padding: 3px 8px;
     border-radius: 999px;
-    font-size: 12px;
-    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 4px;
 }
 
-.navbar .btn {
-    background: linear-gradient(135deg, #c7a6a1, #8a5f5b);
-    color: #fff;
-    border: none;
-    padding: 7px 12px;
-    border-radius: 999px;
-    cursor: pointer;
-    font-family: 'Lora', serif;
-    font-weight: 500;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
+/* ===============================
+   LOGOUT BUTTON
+================================ */
 
-.navbar .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(138,95,91,0.18);
-}
-
-.navbar .nav-right {
+.logout-btn {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: var(--nav-text);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Lora', serif;
+    transition: all 0.2s ease;
 }
+
+.logout-btn svg {
+    font-size: 15px;
+}
+
+.logout-btn:hover {
+    background: var(--nav-muted);
+    color: #3b2523;
+    border-color: var(--nav-muted);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
 
 @media (max-width: 700px) {
     .navbar {
-        padding: 10px 12px;
+        padding: 12px 18px;
     }
 
-    .navbar .nav-links {
-        gap: 8px;
+    .nav-links {
+        gap: 14px;
     }
 
-    .navbar .nav-links a {
-        font-size: 13px;
+    .nav-link span {
+        display: none; /* samo ikonice na mobitelu */
     }
-
 }

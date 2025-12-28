@@ -1,71 +1,183 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');
+.shop-hero {
+    width: 100%;
+    height: 520px;
+    background-image: url("../picture/hero.jpg");
+    background-size: cover;
+    background-position: center top;
+    margin-bottom: 70px;
+    position: relative;
+    overflow: hidden;
 
-.shop {
-    padding: 28px;
-    font-family: 'Lora', serif;
-    color: #3f2f2d;
-    background: linear-gradient(180deg,rgba(255, 250, 250, 1) 0%, rgba(226, 211, 210, 1) 59%, rgba(138, 95, 91, 1) 100%);
-    min-height: 100vh;
+    border-radius: 0;
 }
 
-.shop h1 {
+/* TAMNI / ROSE OVERLAY */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+            180deg,
+            rgba(90, 55, 52, 0.65) 0%,
+            rgba(90, 55, 52, 0.35) 50%,
+            rgba(90, 55, 52, 0.55) 100%
+    );
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.hero-overlay h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 44px;
+    color: #fff;
+    margin-bottom: 14px;
+}
+
+.hero-overlay p {
+    font-size: 16px;
+    color: #f2e8e7;
+    max-width: 520px;
+    margin-bottom: 26px;
+}
+
+/* CTA DUGME */
+.hero-btn {
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #5f3f3c;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.hero-btn:hover {
+    background: #f3e6e5;
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   PRODUCTS SECTION
+================================ */
+
+.products-section {
+    padding: 80px 0 40px;
+    text-align: center;
+}
+
+.section-title {
     font-family: 'Playfair Display', serif;
-    color: #8a5f5b;
-    margin-bottom: 16px;
+    font-size: 32px;
+    color: #6b4a47;
+    margin-bottom: 40px;
 }
 
-.shop .actions {
-    margin-bottom: 20px;
-}
+/* ===============================
+   PRODUCT GRID
+================================ */
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
+/* ===============================
+   PRODUCT CARD
+================================ */
 
 .product-card {
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 16px;
-    background: #fff;
-    box-shadow: 0 6px 18px rgba(138,95,91,0.06);
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(138, 95, 91, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-card h3 {
-    padding-bottom: 5px;
-    margin-top: 0;
-    font-size: 18px;
-    color: #8a5f5b;
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(138, 95, 91, 0.22);
+}
+
+/* ===============================
+   IMAGE
+================================ */
+
+.product-image {
+    width: 100%;
+    height: 260px;
+    background: #f3e6e5;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+
+.product-content {
+    padding: 20px;
+    text-align: left;
+}
+
+.product-content h3 {
     font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #6b4a47;
+    margin-bottom: 6px;
 }
 
-.product-card p {
-    padding-bottom: 5px;
-    color: #6f5b57;
+.product-desc {
+    font-size: 14px;
+    color: #7a5a56;
     line-height: 1.4;
+    margin-bottom: 16px;
 }
 
-.btn-primary {
-    margin-top: 10px;
-    background: #2b8a2b;
+/* ===============================
+   FOOTER
+================================ */
+
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 16px;
+    color: #6b4a47;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+
+.btn-add {
+    background: linear-gradient(135deg, #a97772, #6b4a47);
     color: #fff;
     border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px;
     cursor: pointer;
+    transition: all 0.25s ease;
 }
 
-.btn-secondary {
-    background: transparent;
-    border: 1px solid #c7a6a1;
-    color: #8a5f5b;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-@media (max-width: 700px) {
-    .shop { padding: 16px; }
+.btn-add:hover {
+    background: linear-gradient(135deg, #8a5f5b, #553734);
 }
 
