@@ -18,7 +18,6 @@ const LoginPage = () => {
         api.post("/auth/login", { email, lozinka })
             .then((res) => {
                 login(res.data.korisnik);
-                // redirekcija na osnovu uloge
                 const role = res.data.korisnik?.uloga?.toUpperCase();
                 if (role === "ADMIN") navigate("/dashboard");
                 else navigate("/shop");
@@ -29,47 +28,46 @@ const LoginPage = () => {
     };
 
     return (
+        <div className="login-wrapper">
+            <div className="login-box">
 
-        <div className="login-page">
-            <div className="login-left">
-                <h1 className="brand">Roséa</h1>
-                <p className="subtitle">Tamo gdje njega<br/>postaje ritual.</p>
-                <p className="description">
-                    Dobro došli u Roséa web prodavnicu!<br />
-                    Prijavite se kako biste otkrili naš svijet ljepote i nježnosti.
-                </p>
-            </div>
+                {/* LEFT IMAGE */}
+                <div className="login-image">
+                    <img src={require("../picture/flower.jpg")} alt="Login visual" />
+                </div>
 
-            <div className="login-right">
-                <div className="login-card">
-                    <h2 className="card-title">Prijava</h2>
+                {/* RIGHT FORM */}
+                <div className="login-form">
+                    <h2>Prijava</h2>
 
                     {error && <p className="error">{error}</p>}
 
                     <form onSubmit={handleSubmit}>
+                        <label>Email</label>
                         <input
                             type="email"
-                            placeholder="Email"
+                            placeholder="Unesite email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
 
+                        <label>Lozinka</label>
                         <input
                             type="password"
-                            placeholder="Lozinka"
+                            placeholder="Unesite lozinku"
                             value={lozinka}
                             onChange={(e) => setLozinka(e.target.value)}
                             required
                         />
 
-                        <button type="submit">Prijavi se</button>
+                        <button type="submit">Login</button>
                     </form>
                 </div>
+
             </div>
         </div>
-
-);
+    );
 };
 
 export default LoginPage;

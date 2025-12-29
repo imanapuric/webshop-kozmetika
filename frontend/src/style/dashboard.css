@@ -1,379 +1,817 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Lora:wght@400;500;600;700&display=swap");
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* ===============================
-   DASHBOARD BASE
-================================ */
-
-/* SAMO PRVA KARTICA (FORMA) */
-.dashboard-card.form-card {
-    max-width: 700px;   /* ⬅️ OVO RJEŠAVA PROBLEM */
-    width: 100%;
-    padding: 36px 40px;
-}
-
-/* NASLOV TABELE */
-.section-title {
-    font-family: "Playfair Display", serif;
-    font-size: 26px;
-    color: #7a4f4b;              /* tamnija rose */
-    margin-bottom: 22px;        /* ⬅️ RAZMAK OD TABELE */
-    padding-left: 4px;
-}
-
-.dashboard {
+.admin-shell {
     min-height: 100vh;
-    padding: 40px 60px;
+    padding: 50px 80px;
     font-family: "Lora", serif;
-    background: linear-gradient(
-            180deg,
-            #fffafa 0%,
-            #f3e6e5 55%,
-            #c7a6a1 100%
-    );
-    color: #3f2f2d;
+    color: #2a1d1c;
+    background: linear-gradient(165deg, #fff5f5 0%, #fce8e6 25%, #f5d7d4 50%, #e4b8b4 75%, #d4a09c 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.admin-shell::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(169, 119, 114, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 20s ease-in-out infinite;
+}
+
+.admin-shell::after {
+    content: "";
+    position: fixed;
+    bottom: -30%;
+    left: -15%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(107, 63, 60, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 15s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
 }
 
 /* ===============================
    HEADER
 ================================ */
-
-.dashboard-header {
-    margin-bottom: 42px;
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 36px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+            0 20px 60px rgba(107, 63, 60, 0.12),
+            0 8px 16px rgba(107, 63, 60, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dashboard-brand {
-    font-family: "Playfair Display", serif;
-    font-size: 46px;
-    color: #8a5f5b;
-    margin-bottom: 6px;
+.admin-header:hover {
+    transform: translateY(-2px);
+    box-shadow:
+            0 28px 80px rgba(107, 63, 60, 0.18),
+            0 12px 24px rgba(107, 63, 60, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.dashboard-tagline {
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #b89a96;
-    margin-bottom: 18px;
-}
-
-.dashboard-title {
-    font-size: 20px;
-    color: #6f5b57;
-}
-
-/* ===============================
-   CARDS
-================================ */
-
-.dashboard-card {
-    background: #ffffff;
-    padding: 26px 30px;
-    border-radius: 22px;
-    box-shadow: 0 16px 36px rgba(138, 95, 91, 0.14);
-    margin-bottom: 40px;
-}
-
-/* ===============================
-   FORM TITLES
-================================ */
-
-.form-title {
-    font-family: "Playfair Display", serif;
-    font-size: 24px;
-    color: #8a5f5b;
-    margin-bottom: 18px;
-}
-
-/* ===============================
-   PRODUCT FORM
-================================ */
-
-.proizvod-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-}
-
-.form-group {
+.header-left {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
-.full-width {
-    grid-column: span 2;
+.header-logo {
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #8b5a57 0%, #6b3f3c 50%, #4a2725 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+.header-logo::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, #a97772 0%, transparent 100%);
+    border-radius: 2px;
+}
+
+.header-tagline {
+    margin-top: 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(107, 63, 60, 0.7);
+    font-weight: 700;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-user {
+    text-align: right;
+    padding-right: 24px;
+    border-right: 2px solid rgba(107, 63, 60, 0.15);
+}
+
+.user-name {
+    font-weight: 700;
+    color: #4b2d2a;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.user-role {
+    font-size: 12px;
+    opacity: 0.65;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* LOGOUT */
+.logout-btn {
+    padding: 13px 28px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #a97772 0%, #8b5a57 50%, #6b3f3c 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+            0 12px 35px rgba(107, 63, 60, 0.25),
+            0 4px 8px rgba(107, 63, 60, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.logout-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.logout-btn:hover::before {
+    left: 100%;
+}
+
+.logout-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+            0 18px 50px rgba(107, 63, 60, 0.35),
+            0 8px 16px rgba(107, 63, 60, 0.2);
+}
+
+.logout-btn:active {
+    transform: translateY(-1px) scale(0.98);
 }
 
 /* ===============================
-   LABELS
+   HERO
 ================================ */
-
-.form-label {
-    font-size: 10.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    color: #9d6b67;
+.admin-hero {
+    margin-top: 40px;
+    padding: 40px 44px;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px) saturate(150%);
+    box-shadow:
+            0 30px 90px rgba(107, 63, 60, 0.12),
+            0 12px 28px rgba(107, 63, 60, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 1);
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.form-input,
-.form-textarea,
-.form-select {
-    padding: 14px 18px;
-    border: 2px solid #f1dcd9;
-    border-radius: 18px;
+.admin-hero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(169, 119, 114, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.admin-hero:hover {
+    transform: translateY(-4px);
+    box-shadow:
+            0 35px 100px rgba(107, 63, 60, 0.16),
+            0 16px 36px rgba(107, 63, 60, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.admin-hero h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #4b2d2a;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-hero span {
+    font-weight: 800;
+    background: linear-gradient(135deg, #a97772 0%, #7b4644 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.admin-hero p {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(75, 45, 42, 0.75);
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===============================
+   MAIN CONTENT
+================================ */
+.admin-content {
+    margin-top: 48px;
+    position: relative;
+    z-index: 5;
+}
+
+/* ===============================
+   CARDS (ProizvodiLista koristi)
+================================ */
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 32px;
+    padding: 42px;
+    box-shadow:
+            0 28px 80px rgba(107, 63, 60, 0.11),
+            0 10px 24px rgba(107, 63, 60, 0.07),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    margin-bottom: 40px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #a97772 0%, #6b3f3c 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+            0 35px 100px rgba(107, 63, 60, 0.16),
+            0 14px 32px rgba(107, 63, 60, 0.11),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.dashboard-card:hover::before {
+    opacity: 1;
+}
+
+/* ===============================
+   FORMA - Dodaj novi proizvod / Uredi
+================================ */
+.dashboard-card form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    max-width: 100%;
+}
+
+/* Opis i slika preko cijele širine */
+.dashboard-card form > *:nth-child(3),
+.dashboard-card form > *:nth-child(6) {
+    grid-column: 1 / -1;
+}
+
+/* Dugme preko cijele širine */
+.dashboard-card form button[type="submit"] {
+    grid-column: 1 / -1;
+    justify-self: start;
+}
+
+.dashboard-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dashboard-card label span {
+    font-weight: 700;
+    color: #4b2d2a;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.dashboard-card input[type="text"],
+.dashboard-card input[type="number"],
+.dashboard-card textarea,
+.dashboard-card select {
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 2px solid rgba(107, 63, 60, 0.15);
+    background: rgba(255, 255, 255, 0.85);
     font-family: "Lora", serif;
     font-size: 15px;
-    color: #7a5a56;
-    background: #fff9f8;
-    transition: all 0.25s ease;
+    color: #2a1d1c;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(107, 63, 60, 0.05);
 }
 
-/* Placeholder – italic, soft */
-.form-input::placeholder,
-.form-textarea::placeholder {
-    color: #c7a6a1;
-    font-style: italic;
+.dashboard-card input[type="text"]:hover,
+.dashboard-card input[type="number"]:hover,
+.dashboard-card textarea:hover,
+.dashboard-card select:hover {
+    border-color: rgba(107, 63, 60, 0.25);
+    background: rgba(255, 255, 255, 0.95);
 }
 
-/* Fokus – ROSE glow */
-.form-input:focus,
-.form-textarea:focus,
-.form-select:focus {
-    border-color: #d7a5a0;
-    background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(215, 165, 160, 0.25);
+.dashboard-card input[type="text"]:focus,
+.dashboard-card input[type="number"]:focus,
+.dashboard-card textarea:focus,
+.dashboard-card select:focus {
     outline: none;
+    border-color: #a97772;
+    background: white;
+    box-shadow:
+            0 6px 20px rgba(169, 119, 114, 0.18),
+            0 0 0 4px rgba(169, 119, 114, 0.08);
+    transform: translateY(-1px);
 }
 
-
-/* ===============================
-   SELECT
-================================ */
-
-.form-select {
-    cursor: pointer;
-    padding-right: 36px;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239d6b67' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 14px;
-}
-
-.form-select option:first-child {
-    color: #b89a96;
-}
-
-/* ===============================
-   TEXTAREA
-================================ */
-
-.form-textarea {
+.dashboard-card textarea {
+    min-height: 120px;
     resize: vertical;
-    min-height: 70px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-/* ===============================
-   FORM ACTIONS
-================================ */
-
-.form-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-/* GLAVNO DUGME – ROSE (BEZ ZELENE) */
-.btn-submit {
-    padding: 9px 24px;
-    background: linear-gradient(135deg, #c9a3a0, #a97772);
-    color: #ffffff;
-    border: none;
-    border-radius: 999px;
-    font-family: "Lora", serif;
-    font-size: 13px;
-    font-weight: 600;
+.dashboard-card select {
     cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 14px rgba(167, 119, 114, 0.35);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%234b2d2a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 50px;
 }
 
-.btn-submit:hover {
-    background: linear-gradient(135deg, #b98a86, #9a6863);
-    transform: translateY(-2px);
+/* File input poseban stil */
+.dashboard-card input[type="file"] {
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px dashed rgba(107, 63, 60, 0.25);
+    background: rgba(255, 245, 245, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Lora", serif;
+    font-size: 14px;
+    color: #4b2d2a;
+}
+
+.dashboard-card input[type="file"]:hover {
+    border-color: #a97772;
+    background: rgba(255, 245, 245, 0.9);
+    border-style: solid;
+}
+
+.dashboard-card input[type="file"]::file-selector-button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #a97772 0%, #8b5a57 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    margin-right: 16px;
+    transition: all 0.2s ease;
+}
+
+.dashboard-card input[type="file"]::file-selector-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(107, 63, 60, 0.3);
+}
+
+.dashboard-card button[type="submit"] {
+    padding: 18px 48px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #a97772 0%, #8b5a57 50%, #6b3f3c 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+            0 8px 24px rgba(107, 63, 60, 0.3),
+            0 4px 8px rgba(107, 63, 60, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card button[type="submit"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.5s;
+}
+
+.dashboard-card button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+.dashboard-card button[type="submit"]:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+            0 12px 36px rgba(107, 63, 60, 0.4),
+            0 6px 12px rgba(107, 63, 60, 0.25);
+}
+
+.dashboard-card button[type="submit"]:active {
+    transform: translateY(-1px) scale(0.98);
 }
 
 /* ===============================
-   TABLE
+   TABELA - Proizvodi u ponudi
 ================================ */
-
-.table-wrapper {
-    overflow: hidden;
-    border-radius: 18px;
-}
-
-.table {
+.dashboard-card table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
 }
 
-.table th,
-.table td {
-    text-align: center;
+.dashboard-card thead {
+    background: rgba(169, 119, 114, 0.15);
+}
+
+.dashboard-card th {
+    padding: 16px 12px;
+    text-align: left;
+    font-weight: 700;
+    color: #4b2d2a;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(107, 63, 60, 0.2);
+}
+
+.dashboard-card th:first-child {
+    border-radius: 12px 0 0 0;
+}
+
+.dashboard-card th:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+.dashboard-card td {
+    padding: 16px 12px;
+    color: #2a1d1c;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(107, 63, 60, 0.1);
     vertical-align: middle;
 }
 
-.table thead {
-    background: linear-gradient(
-            180deg,
-            #f8ecec 0%,
-            #f5e7e5 100%
-    );
+.dashboard-card tbody tr {
+    transition: background-color 0.2s ease;
 }
 
-.table thead th {
-    font-family: "Playfair Display", serif;
-    font-size: 14px;
+.dashboard-card tbody tr:hover {
+    background: rgba(169, 119, 114, 0.08);
+}
+
+.dashboard-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.dashboard-card td img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card td button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
     font-weight: 600;
-    color: #8a5f5b;
-    padding: 18px 20px;
-}
-
-.table tbody td {
-    padding: 20px 20px;
-    font-size: 15px;
-    color: #5f4a47;
-    border-bottom: 1px solid #f1dcd9;
-}
-
-.table tbody tr:hover {
-    background: #fff5f4;
-    transition: background 0.2s ease;
-}
-
-/* DUGMAD U TABELI */
-.btn-edit {
-    background: #f3e6e5;
-    color: #8a5f5b;
-    border: 1px solid #e2c9c6;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    cursor: pointer;
+    font-size: 13px;
     transition: all 0.2s ease;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
-.btn-edit:hover {
-    background: #e9d2cf;
+.dashboard-card td button:last-child {
+    margin-right: 0;
 }
 
-.btn-delete {
-    background: #f6dede;
-    color: #a04e4a;
-    border: 1px solid #e2b9b6;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.dashboard-card td button:first-of-type {
+    background: linear-gradient(135deg, #7ba5d1 0%, #5a8bb8 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(90, 139, 184, 0.3);
 }
 
-.btn-delete:hover {
-    background: #edc9c6;
+.dashboard-card td button:first-of-type:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(90, 139, 184, 0.4);
 }
 
-.table td:last-child {
-    white-space: nowrap;
+.dashboard-card td button:last-of-type {
+    background: linear-gradient(135deg, #d17b7b 0%, #b85a5a 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(184, 90, 90, 0.3);
 }
 
+.dashboard-card td button:last-of-type:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(184, 90, 90, 0.4);
+}
+
+/* Titles */
+.section-title,
+.form-title {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #4b2d2a;
+    margin-bottom: 28px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after,
+.form-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, #a97772 0%, transparent 100%);
+    border-radius: 2px;
+}
 
 /* ===============================
    RESPONSIVE
 ================================ */
-
-@media (max-width: 768px) {
-    .dashboard {
-        padding: 24px;
+@media (max-width: 1050px) {
+    .admin-shell {
+        padding: 30px;
     }
 
-    .dashboard-brand {
-        font-size: 36px;
-    }
-
-    .proizvod-form {
-        grid-template-columns: 1fr;
-    }
-
-    .full-width {
-        grid-column: span 1;
-    }
-
-    .form-actions {
+    .admin-header {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 24px 28px;
     }
 
-    .btn-submit {
+    .header-right {
         width: 100%;
+        justify-content: space-between;
+    }
+
+    .header-user {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 2px solid rgba(107, 63, 60, 0.15);
+        padding-bottom: 12px;
+        text-align: left;
+    }
+
+    .admin-hero h2 {
+        font-size: 28px;
+    }
+
+    .dashboard-card {
+        padding: 32px 28px;
     }
 }
 
-/* DRUGA KARTICA (TABELA) OSTAVLJENA ŠIROKA */
-.dashboard-card:not(.form-card) {
-    max-width: 100%;
+@media (max-width: 600px) {
+    .admin-shell {
+        padding: 20px;
+    }
+
+    .header-logo {
+        font-size: 32px;
+    }
+
+    .admin-hero {
+        padding: 28px 24px;
+    }
+
+    .admin-hero h2 {
+        font-size: 24px;
+    }
+
+    .section-title,
+    .form-title {
+        font-size: 26px;
+    }
 }
 
 /* ===============================
-   FORM + IMAGE LAYOUT (SLIKA DESNO)
+   FORM CARD (Dodaj/Uredi proizvod) - BRUTAL LAYOUT FIX
 ================================ */
 
-.form-layout {
+.dashboard-card.form-card {
+    padding: 50px 52px;
+}
+
+/* forma koristi tvoj existing class: .proizvod-form */
+.dashboard-card.form-card .proizvod-form {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 50px;
-    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+    margin-top: 22px;
 }
 
-/* LIJEVO – FORMA */
-.form-left {
-    width: 100%;
+/* full width elementi preko cijele forme */
+.dashboard-card.form-card .full-width {
+    grid-column: 1 / -1;
 }
 
-.form-right img {
-    width: 100%;
-    max-width: 360px;
-    height: 480px;
-    object-fit: cover;
-    border-radius: 22px;
-
-    opacity: 0.85;
-    filter: saturate(0.9) brightness(1.05);
-
-    box-shadow:
-            0 14px 40px rgba(138, 95, 91, 0.25);
-
-    transition: all 0.4s ease;
+/* svaki group */
+.dashboard-card.form-card .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
+/* label */
+.dashboard-card.form-card .form-label {
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: rgba(75, 45, 42, 0.85);
+}
 
-/* RESPONSIVE – sakrij sliku na manjem ekranu */
-@media (max-width: 1024px) {
-    .form-layout {
+/* inputs */
+.dashboard-card.form-card .form-input,
+.dashboard-card.form-card .form-select,
+.dashboard-card.form-card .form-textarea {
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 2px solid rgba(107, 63, 60, 0.12);
+    background: rgba(255, 255, 255, 0.9);
+    font-family: "Lora", serif;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+/* focus efekat */
+.dashboard-card.form-card .form-input:focus,
+.dashboard-card.form-card .form-select:focus,
+.dashboard-card.form-card .form-textarea:focus {
+    outline: none;
+    border-color: #a97772;
+    background: #fff;
+    box-shadow: 0 0 0 5px rgba(169, 119, 114, 0.12);
+    transform: translateY(-1px);
+}
+
+/* opis */
+.dashboard-card.form-card .form-textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* ===============================
+   FILE INPUT PREMIUM LOOK
+================================ */
+
+.dashboard-card.form-card input[type="file"] {
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 2px dashed rgba(107, 63, 60, 0.25);
+    background: rgba(255, 245, 245, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Lora", serif;
+    font-size: 14px;
+    color: rgba(75, 45, 42, 0.85);
+}
+
+.dashboard-card.form-card input[type="file"]:hover {
+    border-style: solid;
+    border-color: #a97772;
+    background: rgba(255, 255, 255, 0.92);
+}
+
+.dashboard-card.form-card input[type="file"]::file-selector-button {
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #a97772, #6b3f3c);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    margin-right: 14px;
+    transition: 0.2s ease;
+}
+
+.dashboard-card.form-card input[type="file"]::file-selector-button:hover {
+    transform: scale(1.04);
+}
+
+/* ===============================
+   SUBMIT BUTTON (CENTAR & MOĆNO)
+================================ */
+
+.dashboard-card.form-card .form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.dashboard-card.form-card .btn-submit {
+    width: fit-content;
+    padding: 18px 56px;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #a97772 0%, #8b5a57 50%, #6b3f3c 100%);
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    box-shadow: 0 12px 30px rgba(107, 63, 60, 0.32);
+}
+
+.dashboard-card.form-card .btn-submit:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 18px 50px rgba(107, 63, 60, 0.45);
+}
+
+/* ===============================
+   RESPONSIVE FIX
+================================ */
+
+@media (max-width: 850px) {
+    .dashboard-card.form-card .proizvod-form {
         grid-template-columns: 1fr;
     }
 
-    .form-right {
-        display: none;
+    .dashboard-card.form-card .btn-submit {
+        width: 100%;
+        text-align: center;
     }
 }
-
-

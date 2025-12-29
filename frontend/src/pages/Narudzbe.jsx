@@ -8,13 +8,11 @@ const Narudzbe = () => {
     const [selectedId, setSelectedId] = useState(null);
     const [statusMap, setStatusMap] = useState({});
 
-    // ✅ Učitaj sve narudžbe (Admin)
     const fetchNarudzbe = () => {
         api.get("/narudzbe")
             .then(res => {
                 setNarudzbe(res.data);
 
-                // popuni mapu statusa
                 const mapa = {};
                 res.data.forEach(n => {
                     mapa[n.id] = n.status;
@@ -28,7 +26,6 @@ const Narudzbe = () => {
         fetchNarudzbe();
     }, []);
 
-    // ✅ Učitaj stavke za izabranu narudžbu
     const ucitajStavke = (id) => {
         setSelectedId(id);
 
@@ -37,12 +34,11 @@ const Narudzbe = () => {
             .catch(err => console.error(err));
     };
 
-    // ✅ Sačuvaj status (PUT)
     const sacuvajStatus = (id) => {
         api.put(`/narudzbe/${id}/status`, { status: statusMap[id] })
             .then(() => {
                 alert("Status ažuriran ✅");
-                fetchNarudzbe(); // refresh liste
+                fetchNarudzbe();
             })
             .catch(err => {
                 console.error(err);
@@ -51,89 +47,127 @@ const Narudzbe = () => {
     };
 
     return (
-        <div className="narudzbe">
-            <h1>Narudžbe (Admin)</h1>
+        <div className="narudzbe-shell">
 
-            <table className="table" cellPadding="8" style={{ width: "100%", marginTop: "15px" }}>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Korisnik</th>
-                    <th>Email</th>
-                    <th>Ukupno</th>
-                    <th>Status + Akcija</th>
-                    <th>Datum</th>
-                    <th>Detalji</th>
-                </tr>
-                </thead>
+            {/* HEADER */}
+            <div className="narudzbe-header">
+                <h1>Narudžbe</h1>
+                <p>Pregled svih narudžbi i upravljanje statusima.</p>
+            </div>
 
-                <tbody>
-                {narudzbe.map(n => (
-                    <tr key={n.id}>
-                        <td>{n.id}</td>
-                        <td>{n.korisnik_ime}</td>
-                        <td>{n.korisnik_email}</td>
-                        <td>{n.ukupno} KM</td>
+            {/* LISTA NARUDŽBI */}
+            <section className="narudzbe-card">
+                <h2 className="section-title">Sve narudžbe</h2>
 
-                        {/* ✅ Status dropdown + save */}
-                        <td>
-                            <select
-                                value={statusMap[n.id] || n.status}
-                                onChange={(e) =>
-                                    setStatusMap({ ...statusMap, [n.id]: e.target.value })
-                                }
-                            >
-                                <option value="u obradi">u obradi</option>
-                                <option value="poslano">poslano</option>
-                                <option value="završeno">završeno</option>
-                                <option value="otkazano">otkazano</option>
-                            </select>
-
-                            <button
-                                style={{ marginLeft: "10px" }}
-                                onClick={() => sacuvajStatus(n.id)}
-                            >
-                                Sačuvaj
-                            </button>
-                        </td>
-
-                        <td>{new Date(n.datum_kreiranja).toLocaleString()}</td>
-
-                        <td>
-                            <button onClick={() => ucitajStavke(n.id)}>
-                                Prikaži stavke
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-
-            {/* ✅ Detalji narudžbe */}
-            {selectedId && (
-                <>
-                    <h2 style={{ marginTop: "30px" }}>Stavke narudžbe #{selectedId}</h2>
-
-                    <table className="table" cellPadding="8" style={{ width: "100%", marginTop: "10px" }}>
+                <div className="table-wrapper">
+                    <table className="narudzbe-table">
                         <thead>
                         <tr>
-                            <th>Proizvod</th>
-                            <th>Količina</th>
-                            <th>Cijena</th>
+                            <th>ID</th>
+                            <th>Korisnik</th>
+                            <th>Email</th>
+                            <th>Ukupno</th>
+                            <th>Status</th>
+                            <th>Datum</th>
+                            <th>Detalji</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        {stavke.map(s => (
-                            <tr key={s.id}>
-                                <td>{s.naziv}</td>
-                                <td>{s.kolicina}</td>
-                                <td>{s.cijena} KM</td>
+                        {narudzbe.map(n => (
+                            <tr key={n.id} className={selectedId === n.id ? "active-row" : ""}>
+
+                                <td className="id-col">#{n.id}</td>
+                                <td>{n.korisnik_ime}</td>
+                                <td className="email-col">{n.korisnik_email}</td>
+                                <td className="price-col">{Number(n.ukupno).toFixed(2)} KM</td>
+
+                                {/* STATUS */}
+                                <td>
+                                    <div className="status-box">
+                                        <select
+                                            value={statusMap[n.id] || n.status}
+                                            onChange={(e) =>
+                                                setStatusMap({ ...statusMap, [n.id]: e.target.value })
+                                            }
+                                        >
+                                            <option value="u obradi">u obradi</option>
+                                            <option value="poslano">poslano</option>
+                                            <option value="završeno">završeno</option>
+                                            <option value="otkazano">otkazano</option>
+                                        </select>
+
+                                        <button
+                                            className="btn-save"
+                                            onClick={() => sacuvajStatus(n.id)}
+                                        >
+                                            Sačuvaj
+                                        </button>
+                                    </div>
+                                </td>
+
+                                <td>{new Date(n.datum_kreiranja).toLocaleString()}</td>
+
+                                <td>
+                                    <button
+                                        className="btn-details"
+                                        onClick={() => ucitajStavke(n.id)}
+                                    >
+                                        Prikaži stavke
+                                    </button>
+                                </td>
                             </tr>
                         ))}
+
+                        {narudzbe.length === 0 && (
+                            <tr>
+                                <td colSpan="7" className="empty-row">
+                                    Nema narudžbi za prikaz.
+                                </td>
+                            </tr>
+                        )}
                         </tbody>
                     </table>
-                </>
+                </div>
+            </section>
+
+            {/* STAVKE */}
+            {selectedId && (
+                <section className="narudzbe-card details-card">
+                    <h2 className="section-title">
+                        Stavke narudžbe <span>#{selectedId}</span>
+                    </h2>
+
+                    <div className="table-wrapper">
+                        <table className="narudzbe-table">
+                            <thead>
+                            <tr>
+                                <th>Proizvod</th>
+                                <th>Količina</th>
+                                <th>Cijena</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {stavke.map(s => (
+                                <tr key={s.id}>
+                                    <td>{s.naziv}</td>
+                                    <td className="qty-col">{s.kolicina}</td>
+                                    <td className="price-col">{Number(s.cijena).toFixed(2)} KM</td>
+                                </tr>
+                            ))}
+
+                            {stavke.length === 0 && (
+                                <tr>
+                                    <td colSpan="3" className="empty-row">
+                                        Nema stavki za ovu narudžbu.
+                                    </td>
+                                </tr>
+                            )}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             )}
         </div>
     );
