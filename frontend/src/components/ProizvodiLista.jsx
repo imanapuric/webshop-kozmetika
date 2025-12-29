@@ -50,6 +50,8 @@ const ProizvodiLista = () => {
                             <th>Cijena (KM)</th>
                             <th>Količina</th>
                             <th>Akcije</th>
+                            <th>Slika</th>
+
                         </tr>
                         </thead>
 
@@ -74,8 +76,43 @@ const ProizvodiLista = () => {
                                         Obriši
                                     </button>
                                 </td>
+                                <td>
+                                    {p.slika ? (
+                                        <img
+                                            src={`http://localhost:3001/uploads/${p.slika}`}
+                                            alt={p.naziv}
+                                            style={{
+                                                width: "50px",
+                                                height: "50px",
+                                                objectFit: "cover",
+                                                borderRadius: "6px"
+                                            }}
+                                        />
+                                    ) : (
+                                        "Nema slike"
+                                    )}
+                                </td>
+
+                                <td>
+                                    {p.slika ? (
+                                        <img
+                                            src={`http://localhost:3001/uploads/${p.slika}`}
+                                            alt={p.naziv}
+                                            style={{
+                                                width: "55px",
+                                                height: "55px",
+                                                objectFit: "cover",
+                                                borderRadius: "8px"
+                                            }}
+                                        />
+                                    ) : (
+                                        <span style={{color: "#aaa"}}>Nema slike</span>
+                                    )}
+                                </td>
+
                             </tr>
                         ))}
+
                         </tbody>
                     </table>
                 </div>

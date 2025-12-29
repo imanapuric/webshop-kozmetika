@@ -25,8 +25,8 @@ const Proizvod = {
 
     create: (data, cb) => {
         const sql = `
-      INSERT INTO proizvodi (naziv, opis, cijena, kolicina, kategorija_id)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO proizvodi (naziv, opis, cijena, kolicina, kategorija_id, slika)
+      VALUES (?, ?, ?, ?, ?, ?)
     `;
         db.query(
             sql,
@@ -35,7 +35,8 @@ const Proizvod = {
                 data.opis,
                 data.cijena,
                 data.kolicina,
-                data.kategorija_id
+                data.kategorija_id,
+                data.slika
             ],
             cb
         );
@@ -44,7 +45,7 @@ const Proizvod = {
     update: (id, data, cb) => {
         const sql = `
       UPDATE proizvodi
-      SET naziv = ?, opis = ?, cijena = ?, kolicina = ?, kategorija_id = ?
+      SET naziv = ?, opis = ?, cijena = ?, kolicina = ?, kategorija_id = ?, slika=?
       WHERE id = ?
     `;
         db.query(
@@ -55,6 +56,7 @@ const Proizvod = {
                 data.cijena,
                 data.kolicina,
                 data.kategorija_id,
+                data.slika,
                 id
             ],
             cb

@@ -10,7 +10,8 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
         opis: "",
         cijena: "",
         kolicina: "",
-        kategorija_id: ""
+        kategorija_id: "",
+        slika: null
     });
 
     useEffect(() => {
@@ -26,7 +27,8 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
                 opis: selectedProizvod.opis || "",
                 cijena: selectedProizvod.cijena || "",
                 kolicina: selectedProizvod.kolicina || "",
-                kategorija_id: selectedProizvod.kategorija_id || ""
+                kategorija_id: selectedProizvod.kategorija_id || "",
+                slika: null
             });
         }
     }, [selectedProizvod]);
@@ -35,25 +37,50 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleFileChange = (e) => {
+        setFormData({ ...formData, slika: e.target.files[0] });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const request = selectedProizvod
-            ? api.put(`/proizvodi/${selectedProizvod.id}`, formData)
-            : api.post("/proizvodi", formData);
+        try {
+            const data = new FormData();
+            data.append("naziv", formData.naziv);
+            data.append("opis", formData.opis);
+            data.append("cijena", formData.cijena);
+            data.append("kolicina", formData.kolicina);
+            data.append("kategorija_id", formData.kategorija_id);
 
-        request
-            .then(() => {
-                refresh();
-                setFormData({
-                    naziv: "",
-                    opis: "",
-                    cijena: "",
-                    kolicina: "",
-                    kategorija_id: ""
+            if (formData.slika) {
+                data.append("slika", formData.slika);
+            }
+
+            if (selectedProizvod) {
+                await api.put(`/proizvodi/${selectedProizvod.id}`, data, {
+                    headers: { "Content-Type": "multipart/form-data" }
                 });
-            })
-            .catch(err => console.error(err));
+            } else {
+                await api.post("/proizvodi", data, {
+                    headers: { "Content-Type": "multipart/form-data" }
+                });
+            }
+
+            refresh();
+
+            setFormData({
+                naziv: "",
+                opis: "",
+                cijena: "",
+                kolicina: "",
+                kategorija_id: "",
+                slika: null
+            });
+
+        } catch (err) {
+            console.error(err);
+            alert("Greška pri dodavanju proizvoda!");
+        }
     };
 
     return (
@@ -62,7 +89,7 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
                 {selectedProizvod ? "Uredi proizvod" : "Dodaj novi proizvod"}
             </h2>
 
-            <form className="proizvod-form" onSubmit={handleSubmit}>
+            <form className="proizvod-form" onSubmit={handleSubmit} encType="multipart/form-data">
 
                 <div className="form-group">
                     <label className="form-label">Naziv</label>
@@ -81,6 +108,7 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
                     <input
                         className="form-input"
                         type="number"
+                        step="0.01"
                         name="cijena"
                         placeholder="0.00"
                         value={formData.cijena}
@@ -122,7 +150,7 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
                         onChange={handleChange}
                         required
                     >
-                        <option value=""> Izaberi kategoriju </option>
+                        <option value="">Izaberi kategoriju</option>
                         {kategorije.map(k => (
                             <option key={k.id} value={k.id}>
                                 {k.naziv}
@@ -131,11 +159,22 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
                     </select>
                 </div>
 
+                <div className="form-group full-width">
+                    <label className="form-label">Slika proizvoda</label>
+                    <input
+                        className="form-input"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                    />
+                </div>
+
                 <div className="form-actions full-width">
                     <button type="submit" className="btn-submit">
-                        {selectedProizvod ? "Sačuvaj izmjene " : "Dodaj proizvod "}
+                        {selectedProizvod ? "Sačuvaj izmjene" : "Dodaj proizvod"}
                     </button>
                 </div>
+
             </form>
         </div>
     );

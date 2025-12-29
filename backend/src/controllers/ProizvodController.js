@@ -8,18 +8,30 @@ exports.getAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-    Proizvod.create(req.body, (err) => {
+    const data = {
+        ...req.body,
+        slika: req.file ? req.file.filename : null
+    };
+
+    Proizvod.create(data, (err) => {
         if (err) return res.status(500).json(err);
-        res.json({ poruka: 'Proizvod dodan' });
+        res.json({ poruka: "Proizvod dodan" });
     });
 };
 
+
 exports.update = (req, res) => {
-    Proizvod.update(req.params.id, req.body, (err) => {
+    const data = {
+        ...req.body,
+        slika: req.file ? req.file.filename : req.body.slika
+    };
+
+    Proizvod.update(req.params.id, data, (err) => {
         if (err) return res.status(500).json(err);
-        res.json({ poruka: 'Proizvod ažuriran' });
+        res.json({ poruka: "Proizvod ažuriran" });
     });
 };
+
 
 exports.delete = (req, res) => {
     Proizvod.delete(req.params.id, (err) => {
