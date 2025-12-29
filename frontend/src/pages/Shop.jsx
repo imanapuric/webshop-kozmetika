@@ -14,6 +14,11 @@ const Shop = () => {
             .catch((err) => console.error(err));
     }, []);
 
+    const getImageSrc = (p) => {
+        if (p.slika) return `http://localhost:3001/uploads/${p.slika}`;
+        return "https://via.placeholder.com/300x300?text=No+Image";
+    };
+
     return (
         <div className="shop">
 
@@ -40,11 +45,14 @@ const Shop = () => {
 
                             {/* IMAGE */}
                             <div className="product-image">
-                                <img
-                                    src="/placeholder-product.jpg"
-                                    alt={p.naziv}
-                                />
+                                {p.slika && (
+                                    <img
+                                        src={`http://localhost:3001/uploads/${p.slika}`}
+                                        alt={p.naziv}
+                                    />
+                                )}
                             </div>
+
 
                             {/* CONTENT */}
                             <div className="product-content">
@@ -52,7 +60,7 @@ const Shop = () => {
                                 <p className="product-desc">{p.opis}</p>
 
                                 <div className="product-footer">
-                                    <span className="price">{p.cijena} KM</span>
+                                    <span className="price">{Number(p.cijena).toFixed(2)} KM</span>
 
                                     <button
                                         onClick={() => dodajUKorpu(p)}

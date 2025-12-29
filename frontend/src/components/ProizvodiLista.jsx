@@ -8,9 +8,10 @@ const ProizvodiLista = () => {
     const [selectedProizvod, setSelectedProizvod] = useState(null);
 
     const fetchProizvodi = () => {
-        api.get("/proizvodi")
-            .then(res => setProizvodi(res.data))
-            .catch(err => console.error(err));
+        api
+            .get("/proizvodi")
+            .then((res) => setProizvodi(res.data))
+            .catch((err) => console.error(err));
     };
 
     useEffect(() => {
@@ -20,22 +21,25 @@ const ProizvodiLista = () => {
     const obrisiProizvod = (id) => {
         if (!window.confirm("Da li ste sigurni da želite obrisati proizvod?")) return;
 
-        api.delete(`/proizvodi/${id}`)
-            .then(() => fetchProizvodi())
-            .catch(err => console.error(err));
+        api
+            .delete(`/proizvodi/${id}`)
+            .then(() => {
+                // ako si obrisala proizvod koji je bio selektovan za edit, resetuj
+                if (selectedProizvod?.id === id) setSelectedProizvod(null);
+                fetchProizvodi();
+            })
+            .catch((err) => console.error(err));
     };
 
     return (
         <div className="dashboard-content">
-
-            {/* ===== DODAJ PROIZVOD ===== */}
+            {/* ===== DODAJ / UREDI PROIZVOD ===== */}
             <section>
                 <DodajProizvod
                     selectedProizvod={selectedProizvod}
                     refresh={fetchProizvodi}
                 />
             </section>
-
 
             {/* ===== LISTA PROIZVODA ===== */}
             <section className="dashboard-card">
@@ -45,23 +49,44 @@ const ProizvodiLista = () => {
                     <table className="table">
                         <thead>
                         <tr>
+                            <th>Slika</th>
                             <th>Naziv</th>
                             <th>Kategorija</th>
                             <th>Cijena (KM)</th>
                             <th>Količina</th>
                             <th>Akcije</th>
-                            <th>Slika</th>
-
                         </tr>
                         </thead>
 
                         <tbody>
-                        {proizvodi.map(p => (
+                        {proizvodi.map((p) => (
                             <tr key={p.id}>
+                                <td>
+                                    {p.slika ? (
+                                        <img
+                                            src={`http://localhost:3001/uploads/${p.slika}`}
+                                            alt={p.naziv}
+                                            style={{
+                                                width: 55,
+                                                height: 55,
+                                                objectFit: "cover",
+                                                borderRadius: 8,
+                                                border: "1px solid rgba(0,0,0,0.08)",
+                                            }}
+                                            onError={(e) => {
+                                                // ako slika ne postoji na serveru, sakrij je (bez placeholdera)
+                                                e.currentTarget.onerror = null;
+                                                e.currentTarget.style.display = "none";
+                                            }}
+                                        />
+                                    ) : null}
+                                </td>
+
                                 <td>{p.naziv}</td>
                                 <td>{p.kategorija}</td>
                                 <td>{Number(p.cijena).toFixed(2)}</td>
                                 <td>{p.kolicina}</td>
+
                                 <td>
                                     <button
                                         className="btn btn-edit"
@@ -76,48 +101,23 @@ const ProizvodiLista = () => {
                                         Obriši
                                     </button>
                                 </td>
-                                <td>
-                                    {p.slika ? (
-                                        <img
-                                            src={`http://localhost:3001/uploads/${p.slika}`}
-                                            alt={p.naziv}
-                                            style={{
-                                                width: "50px",
-                                                height: "50px",
-                                                objectFit: "cover",
-                                                borderRadius: "6px"
-                                            }}
-                                        />
-                                    ) : (
-                                        "Nema slike"
-                                    )}
-                                </td>
-
-                                <td>
-                                    {p.slika ? (
-                                        <img
-                                            src={`http://localhost:3001/uploads/${p.slika}`}
-                                            alt={p.naziv}
-                                            style={{
-                                                width: "55px",
-                                                height: "55px",
-                                                objectFit: "cover",
-                                                borderRadius: "8px"
-                                            }}
-                                        />
-                                    ) : (
-                                        <span style={{color: "#aaa"}}>Nema slike</span>
-                                    )}
-                                </td>
-
                             </tr>
                         ))}
 
+                        {proizvodi.length === 0 && (
+                            <tr>
+                                <td
+                                    colSpan="6"
+                                    style={{ textAlign: "center", padding: 18, color: "#888" }}
+                                >
+                                    Nema proizvoda za prikaz.
+                                </td>
+                            </tr>
+                        )}
                         </tbody>
                     </table>
                 </div>
             </section>
-
         </div>
     );
 };
