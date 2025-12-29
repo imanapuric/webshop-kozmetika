@@ -1,7 +1,8 @@
 import { useState } from "react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 import "../style/login.css";
 
 const LoginPage = () => {
@@ -60,9 +61,11 @@ const LoginPage = () => {
                             onChange={(e) => setLozinka(e.target.value)}
                             required
                         />
-
-                        <button type="submit">Login</button>
+                        <button type="submit">Prijava</button>
                     </form>
+                    <p className="auth-switch">
+                        Nemate račun? <Link to="/register">Registrujte se</Link>
+                    </p>
                 </div>
 
             </div>

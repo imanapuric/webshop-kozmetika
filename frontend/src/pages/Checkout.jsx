@@ -34,7 +34,7 @@ const Checkout = () => {
 
         api.post("/narudzbe", payload)
             .then(() => {
-                alert("Narudžba uspješno poslana ✅");
+                alert("Narudžba uspješno poslana");
                 ocistiKorpu();
                 navigate("/shop");
             })
@@ -45,15 +45,43 @@ const Checkout = () => {
 
     return (
         <div className="checkout">
-            <h1>Checkout</h1>
-            <h2>Ukupno: {ukupno.toFixed(2)} KM</h2>
+            <div className="checkout-top">
+                <div className="checkout-items-card">
+                    <h2>Proizvodi u korpi</h2>
 
-            <button
-                onClick={potvrdiNarudzbu}
-                className="confirm-btn"
-            >
-                Potvrdi narudžbu
-            </button>
+                    {korpa.length === 0 && <p>Korpa je prazna.</p>}
+
+                    {korpa.map((p) => (
+                        <div className="checkout-item" key={p.id}>
+                            <img
+                                src={p.slika ? `http://localhost:3001/uploads/${p.slika}` : require('../picture/pD1.jpg')}
+                                alt={p.naziv}
+                                onError={(e) => {
+                                    // fallback to local placeholder if server image missing
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = require('../picture/pD1.jpg');
+                                }}
+                            />
+                            <div className="meta">
+                                <div style={{ fontWeight: 700 }}>{p.naziv}</div>
+                                <div style={{ fontSize: 13, color: '#6b4b4a' }}>Cijena: {Number(p.cijena).toFixed(2)} KM</div>
+                                <div style={{ fontSize: 13, color: '#6b4b4a' }}>Količina: {p.kolicinaUKorpi}</div>
+                            </div>
+                            <div class ="cijena "style={{ fontWeight: 700 }}>{(Number(p.cijena) * p.kolicinaUKorpi).toFixed(2)} KM</div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="checkout-summary-card">
+                    <h2>Rezime narudžbe</h2>
+                    <div className="summary-row">
+                        <span>Ukupno:</span>
+                        <strong>{ukupno.toFixed(2)} KM</strong>
+                    </div>
+
+                    <button onClick={potvrdiNarudzbu} className="confirm-btn" disabled={korpa.length === 0}>Potvrdi narudžbu</button>
+                </div>
+            </div>
         </div>
     );
 };

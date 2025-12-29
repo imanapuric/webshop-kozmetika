@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "r
 import Navbar from "./components/Navbar";
 
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 
 import Shop from "./pages/Shop";
@@ -18,8 +19,8 @@ function AppContent() {
 
     return (
         <>
-            {/*sakrivanje header-a u login page jer nije potreban*/}
-            {location.pathname !== "/login" && <Navbar />}
+            {/*sakrivanje navbara u login i register page jer nije potreban*/}
+            {location.pathname !== "/login" && location.pathname !== "/register" && <Navbar />}
 
             <Routes>
                 {/* redirect */}
@@ -27,6 +28,7 @@ function AppContent() {
 
                 {/* login */}
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
 
                 {/* adminov dashboard (CRUD) */}
                 <Route

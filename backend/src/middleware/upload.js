@@ -1,3 +1,5 @@
+// middleware za upload slike proizvoda
+
 const multer = require("multer");
 const path = require("path");
 

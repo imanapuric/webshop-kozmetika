@@ -13,7 +13,7 @@
 .login-box {
     width: 900px;
     max-width: 95%;
-    height: 520px;
+    height: 700px;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(14px);
     border-radius: 28px;
@@ -112,6 +112,41 @@
     color: #b84a4a;
     font-size: 14px;
     margin-bottom: 15px;
+}
+
+/* styled select to match text inputs */
+.login-form select {
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 14px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #3f2f2d;
+    outline: none;
+    transition: all 0.25s ease;
+    border: 1px solid rgba(90, 46, 44, 0.15);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* small right padding to make space for the dropdown arrow */
+    padding-right: 40px;
+    background-image: linear-gradient(45deg, transparent 50%, #3f2f2d 50%), linear-gradient(135deg, #3f2f2d 50%, transparent 50%);
+    background-position: calc(100% - 18px) calc(50% - 6px), calc(100% - 12px) calc(50% - 6px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+
+.login-form select:focus {
+    border: 1px solid rgba(90, 46, 44, 0.35);
+    box-shadow: 0 0 0 4px rgba(201, 128, 126, 0.25);
+}
+
+/* remove the default arrow in IE */
+.login-form select::-ms-expand {
+    display: none;
 }
 
 /* RESPONSIVE */

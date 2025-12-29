@@ -35,3 +35,18 @@ exports.login = (req, res) => {
         });
     });
 };
+
+exports.register = (req, res) => {
+    const { ime, email, lozinka, uloga } = req.body;
+
+    if (!ime || !email || !lozinka) {
+        return res.status(400).json({ poruka: "Ime, email i lozinka su obavezni" });
+    }
+
+        // create user
+        Korisnik.create({ ime, email, lozinka, uloga: uloga || 'KORISNIK' }, (err, result) => {
+            if (err) return res.status(500).json({ poruka: "Greška pri registraciji" });
+
+            res.json({ poruka: "Registracija uspješna" });
+    });
+};

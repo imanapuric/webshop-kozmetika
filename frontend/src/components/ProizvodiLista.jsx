@@ -24,7 +24,7 @@ const ProizvodiLista = () => {
         api
             .delete(`/proizvodi/${id}`)
             .then(() => {
-                // ako si obrisala proizvod koji je bio selektovan za edit, resetuj
+                // ako se obrise proizvod koji je bio selektovan za edit, reset
                 if (selectedProizvod?.id === id) setSelectedProizvod(null);
                 fetchProizvodi();
             })
@@ -63,10 +63,7 @@ const ProizvodiLista = () => {
                             <tr key={p.id}>
                                 <td>
                                     {p.slika ? (
-                                        <img
-                                            src={`http://localhost:3001/uploads/${p.slika}`}
-                                            alt={p.naziv}
-                                            style={{
+                                        <img src={`http://localhost:3001/uploads/${p.slika}`} alt={p.naziv} style={{
                                                 width: 55,
                                                 height: 55,
                                                 objectFit: "cover",
@@ -88,29 +85,15 @@ const ProizvodiLista = () => {
                                 <td>{p.kolicina}</td>
 
                                 <td>
-                                    <button
-                                        className="btn btn-edit"
-                                        onClick={() => setSelectedProizvod(p)}
-                                    >
-                                        Izmijeni
-                                    </button>
-                                    <button
-                                        className="btn btn-delete"
-                                        onClick={() => obrisiProizvod(p.id)}
-                                    >
-                                        Obriši
-                                    </button>
+                                    <button className="btn btn-edit" onClick={() => setSelectedProizvod(p)}>Izmijeni</button>
+                                    <button type="button" className="btn btn-delete" onClick={() => obrisiProizvod(p.id)}>Obriši</button>
                                 </td>
                             </tr>
                         ))}
 
                         {proizvodi.length === 0 && (
                             <tr>
-                                <td
-                                    colSpan="6"
-                                    style={{ textAlign: "center", padding: 18, color: "#888" }}
-                                >
-                                    Nema proizvoda za prikaz.
+                                <td colSpan="6" style={{ textAlign: "center", padding: 18, color: "#888" }}>Nema proizvoda za prikaz.
                                 </td>
                             </tr>
                         )}

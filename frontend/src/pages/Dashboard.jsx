@@ -26,9 +26,7 @@ const Dashboard = () => {
                         <p className="user-role">Administrator</p>
                     </div>
 
-                    <button onClick={handleLogout} className="logout-btn">
-                        Logout
-                    </button>
+
                 </div>
             </header>
 

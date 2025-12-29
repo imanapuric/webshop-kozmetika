@@ -32,13 +32,27 @@ exports.update = (req, res) => {
     });
 };
 
-
+// malo detaljnije za debugging jer mi obicni zahtjev daje error 500 bez detalja
 exports.delete = (req, res) => {
-    Proizvod.delete(req.params.id, (err) => {
-        if (err) return res.status(500).json(err);
-        res.json({ poruka: 'Proizvod obrisan' });
+    const id = req.params.id || req.body.id;
+
+    if (!id) return res.status(400).json({ poruka: "ID missing" });
+
+    Proizvod.delete(id, (err, result) => {
+        if (err) {
+            return res.status(500).json({ poruka: "Greška pri brisanju", error: err });
+        }
+
+        const affected = result?.affectedRows ?? result?.rowCount;
+        if (typeof affected === "number" && affected === 0) {
+            return res.status(404).json({ poruka: "Proizvod nije pronađen" });
+        }
+
+        res.json({ poruka: "Proizvod obrisan" });
     });
 };
+
+
 
 exports.getById = (req, res) => {
     Proizvod.getById(req.params.id, (err, row) => {
