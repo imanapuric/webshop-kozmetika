@@ -19,12 +19,13 @@
             var(--nav-bg-dark) 100%
     );
     color: var(--nav-text);
-    padding: 14px 32px;
+    padding: 0 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: 'Lora', serif;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    height: 72px;
 }
 
 /* ===============================
@@ -39,6 +40,14 @@
     color: var(--nav-text);
     text-decoration: none;
 }
+
+.brand-logo {
+    max-height: 100px;     /* ← OVO JE PRAVILO */
+    width: auto;
+    object-fit: contain;
+    margin-top: 10px;
+}
+
 
 /* ===============================
    RIGHT SIDE

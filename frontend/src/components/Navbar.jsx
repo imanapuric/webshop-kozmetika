@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import "../style/navbar.css";
+import logo from "../picture/logo.png";
 
 import {
     FiGrid,
@@ -31,7 +32,7 @@ const Navbar = () => {
 
             {/* LOGO / BRAND */}
             <Link to="/" className="brand">
-                Roséa
+                <img src={logo} alt="Roséa logo" className="brand-logo" />
             </Link>
 
             {/* DESNA STRANA */}
