@@ -26,8 +26,7 @@ const RegisterPage = () => {
         setLoading(true);
 
         api.post("/auth/register", { ime, email, lozinka, uloga })
-            .then((res) => {
-                // on success, go to login
+            .then(() => {
                 navigate("/login");
             })
             .catch((err) => {
@@ -37,34 +36,34 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="login-wrapper">
-            <div className="login-box">
+        <div className="register-wrapper">
+            <div className="register-box">
 
                 {/* LEFT IMAGE */}
-                <div className="login-image">
+                <div className="register-image">
                     <img src={require("../picture/flower.jpg")} alt="Register visual" />
                 </div>
 
                 {/* RIGHT FORM */}
-                <div className="login-form">
+                <div className="register-form">
                     <h2>Registracija</h2>
 
                     {error && <p className="error">{error}</p>}
 
                     <form onSubmit={handleSubmit}>
-                        <label>Ime</label>
+                        <label>Ime i Prezime</label>
                         <input
                             type="text"
-                            placeholder="Unesite ime"
+                            placeholder="Unesite vaše ime"
                             value={ime}
                             onChange={(e) => setIme(e.target.value)}
                             required
                         />
 
-                        <label>Email</label>
+                        <label>Email Adresa</label>
                         <input
                             type="email"
-                            placeholder="Unesite email"
+                            placeholder="ime@primjer.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -73,38 +72,40 @@ const RegisterPage = () => {
                         <label>Lozinka</label>
                         <input
                             type="password"
-                            placeholder="Unesite lozinku"
+                            placeholder="Najmanje 6 karaktera"
                             value={lozinka}
                             onChange={(e) => setLozinka(e.target.value)}
                             required
+                            minLength={6}
                         />
 
-                        <label>Potvrdite lozinku</label>
+                        <label>Potvrdite Lozinku</label>
                         <input
                             type="password"
-                            placeholder="Ponovno unesite lozinku"
+                            placeholder="Ponovite lozinku"
                             value={confirm}
                             onChange={(e) => setConfirm(e.target.value)}
                             required
                         />
-                        <label>Uloga</label>
-                            <select value={uloga} onChange={(e) => setUloga(e.target.value)}>
-                                <option value="KORISNIK">Korisnik</option>
-                                <option value="ADMIN">Admin</option>
-                            </select>
-                            <button type="submit"
-                                    disabled={loading}>{loading ? "Registracija..." : "Registruj se"}</button>
+
+                        <label>Tip Naloga</label>
+                        <select value={uloga} onChange={(e) => setUloga(e.target.value)}>
+                            <option value="KORISNIK">Korisnik</option>
+                            <option value="ADMIN">Administrator</option>
+                        </select>
+
+                        <button type="submit" disabled={loading}>
+                            {loading ? "Kreiranje naloga..." : "Kreiraj Nalog"}
+                        </button>
                     </form>
 
                     <p className="auth-switch">
                         Već imate račun? <Link to="/login">Prijavite se</Link>
                     </p>
                 </div>
-
             </div>
         </div>
     );
 };
 
 export default RegisterPage;
-
