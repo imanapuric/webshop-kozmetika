@@ -89,7 +89,7 @@ const Navbar = () => {
                         className="btn logout-btn"
                     >
                         <FiLogOut />
-                        <span>Logout</span>
+                        <span>Odjavi se</span>
                     </button>
                 )}
 

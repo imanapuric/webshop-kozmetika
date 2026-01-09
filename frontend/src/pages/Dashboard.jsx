@@ -33,7 +33,7 @@ const Dashboard = () => {
             {/* HERO */}
             <section className="admin-hero">
                 <h2>
-                    Dobrodošla nazad, <span>{korisnik?.ime}</span> 🌸
+                    Dobrodošla nazad, <span>{korisnik?.ime}</span>
                 </h2>
                 <p>
                     Ovdje možeš dodavati, uređivati i brisati proizvode iz ponude.

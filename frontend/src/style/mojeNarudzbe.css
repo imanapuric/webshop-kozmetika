@@ -1,24 +1,146 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');
 
 .moje-narudzbe {
-    padding: 24px;
-    height: 100vh;
-    background: linear-gradient(180deg,rgba(255, 250, 250, 1) 0%, rgba(226, 211, 210, 1) 59%, rgba(138, 95, 91, 1) 100%);
+    padding: 50px 80px 80px;
+    min-height: 100vh;
     font-family: 'Lora', serif;
+    background: linear-gradient(180deg, #fffafa 0%, #e2d3d2 60%, #8a5f5b 100%);
+    color: #3f2f2d;
 }
 
+/* ===== NASLOV ===== */
 .moje-narudzbe h1 {
     font-family: 'Playfair Display', serif;
+    font-size: 34px;
     color: #8a5f5b;
+    margin-bottom: 6px;
 }
 
-.moje-narudzbe .table {
+.subtitle {
+    font-size: 14px;
+    color: #a08b87;
+    margin-bottom: 30px;
+}
+
+/* ===== CARD ===== */
+.narudzbe-card,
+.stavke-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 28px;
+    padding: 28px 36px;
+    margin-bottom: 32px;
+    box-shadow:
+            0 20px 60px rgba(107, 63, 60, 0.12),
+            0 6px 18px rgba(107, 63, 60, 0.08);
+}
+
+/* ===== TABELE (global) ===== */
+.narudzbe-card table,
+.stavke-card table {
     width: 100%;
-    margin-top: 12px;
+    border-collapse: collapse;
+    table-layout: fixed; /* bitno: stabilne kolone */
 }
 
-.moje-narudzbe button {
-    padding: 6px 10px;
-    border-radius: 8px;
+.narudzbe-card thead th,
+.stavke-card thead th {
+    padding: 14px 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6f5b57;
+    border-bottom: 1px solid rgba(138, 95, 91, 0.25);
+    text-align: left;
 }
 
+.narudzbe-card tbody td,
+.stavke-card tbody td {
+    padding: 16px 12px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(138, 95, 91, 0.15);
+    vertical-align: middle;
+}
+
+.narudzbe-card tbody tr:last-child td,
+.stavke-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ===== ŠIRINE KOLONA (da se sve poravna) ===== */
+.narudzbe-table .col-id { width: 70px; }
+.narudzbe-table .col-ukupno { width: 150px; }
+.narudzbe-table .col-status { width: 160px; }
+.narudzbe-table .col-datum { width: 260px; }
+.narudzbe-table .col-akcije { width: 220px; }
+
+.stavke-table .col-proizvod { width: 60%; }
+.stavke-table .col-kolicina { width: 20%; }
+.stavke-table .col-cijena { width: 20%; }
+
+/* ===== PORAVNANJA (i TH i TD!) ===== */
+.th-center { text-align: center !important; }
+.th-right { text-align: right !important; }
+
+.td-center { text-align: center !important; }
+.td-right { text-align: right !important; }
+
+.actions {
+    text-align: right;
+}
+
+/* ===== STATUS ===== */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(199, 166, 161, 0.25);
+    color: #6b3f3c;
+}
+
+/* ===== DUGME ===== */
+.btn-stavke {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #a97772, #6b3f3c);
+    box-shadow: 0 6px 18px rgba(107, 63, 60, 0.3);
+    transition: all 0.25s ease;
+}
+
+.btn-stavke:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(107, 63, 60, 0.45);
+}
+
+/* ===== STAVKE NASLOV ===== */
+.stavke-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #8a5f5b;
+    margin-bottom: 18px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .moje-narudzbe {
+        padding: 30px;
+    }
+
+    .narudzbe-card,
+    .stavke-card {
+        padding: 22px;
+    }
+
+    /* ako bude tijesno, nek se datum prelomi */
+    .narudzbe-table .col-datum {
+        word-break: break-word;
+    }
+}
