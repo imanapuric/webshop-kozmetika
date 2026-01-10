@@ -5,7 +5,6 @@ const Narudzba = require("../models/NarudzbaModel");
  GET /api/narudzbe?uloga=ADMIN
  */
 exports.getAll = (req, res) => {
-    // prefer role from middleware (req.uloga), fallback to query param for backward compatibility
     const uloga = req.uloga || req.query?.uloga;
 
     if (uloga !== "ADMIN") {

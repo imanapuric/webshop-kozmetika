@@ -1,16 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');
 
 :root {
-    --nav-bg-dark: #4a2f2c;     /* tamna mocha */
-    --nav-bg-light: #5f3f3c;    /* rose-brown */
-    --nav-text: #f7f3f2;        /* soft white */
-    --nav-muted: #d6bcbc;       /* muted rose */
+    --nav-bg-dark: #4a2f2c;
+    --nav-bg-light: #5f3f3c;
+    --nav-text: #f7f3f2;
+    --nav-muted: #d6bcbc;
     --nav-hover: #f0d7d4;
 }
-
-/* ===============================
-   NAVBAR BASE
-================================ */
 
 .navbar {
     background: linear-gradient(
@@ -28,9 +24,6 @@
     height: 72px;
 }
 
-/* ===============================
-   BRAND / LOGO
-================================ */
 
 .navbar .brand {
     font-family: 'Playfair Display', serif;
@@ -42,16 +35,11 @@
 }
 
 .brand-logo {
-    max-height: 100px;     /* ← OVO JE PRAVILO */
+    max-height: 100px;
     width: auto;
     object-fit: contain;
     margin-top: 10px;
 }
-
-
-/* ===============================
-   RIGHT SIDE
-================================ */
 
 .nav-right {
     display: flex;
@@ -59,17 +47,12 @@
     gap: 26px;
 }
 
-/* ===============================
-   NAV LINKS
-================================ */
-
 .nav-links {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* link wrapper (ikonica + tekst) */
 .nav-link {
     display: flex;
     align-items: center;
@@ -82,20 +65,14 @@
     transition: all 0.2s ease;
 }
 
-/* ikonice */
 .nav-link svg {
     font-size: 16px;
 }
 
-/* hover */
 .nav-link:hover {
     color: var(--nav-hover);
     opacity: 1;
 }
-
-/* ===============================
-   BADGE (KORPA)
-================================ */
 
 .badge {
     background: var(--nav-muted);
@@ -106,10 +83,6 @@
     font-weight: 600;
     margin-left: 4px;
 }
-
-/* ===============================
-   LOGOUT BUTTON
-================================ */
 
 .logout-btn {
     display: flex;
@@ -136,10 +109,6 @@
     border-color: var(--nav-muted);
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
-
 @media (max-width: 700px) {
     .navbar {
         padding: 12px 18px;
@@ -150,6 +119,6 @@
     }
 
     .nav-link span {
-        display: none; /* samo ikonice na mobitelu */
+        display: none;
     }
 }

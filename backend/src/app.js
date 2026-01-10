@@ -8,10 +8,12 @@ app.use(express.json());
 
 app.use("/uploads", express.static("uploads"));
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
-// TEST ruta
+// prvo test ruta
 app.get("/api/test", (req, res) => {
     res.json({ poruka: "Backend radi" });
 });
+
+// rute:
 
 // kategorije
 const kategorijaRoutes = require("./routes/KategorijaRoutes");

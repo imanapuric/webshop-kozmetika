@@ -9,14 +9,13 @@ export const AuthProvider = ({ children }) => {
         const storedUser = localStorage.getItem("korisnik");
         if (storedUser) {
             const parsed = JSON.parse(storedUser);
-            // parsiranje role u uppercase
+            // parsiranje uloge u uppercase
             if (parsed.uloga) parsed.uloga = parsed.uloga.toUpperCase();
             setKorisnik(parsed);
         }
     }, []);
 
     const login = (userData) => {
-        // normalize role
         if (userData.uloga) userData.uloga = userData.uloga.toUpperCase();
         setKorisnik(userData);
         localStorage.setItem("korisnik", JSON.stringify(userData));

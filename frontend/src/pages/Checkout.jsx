@@ -9,6 +9,7 @@ const Checkout = () => {
 
     const korisnik = JSON.parse(localStorage.getItem("korisnik"));
 
+    // reduce će svesti sve elemente niza u jednu vrijednost (ukupnu cijenu)
     const ukupno = korpa.reduce(
         (sum, p) => sum + Number(p.cijena) * p.kolicinaUKorpi,
         0
@@ -21,7 +22,7 @@ const Checkout = () => {
             navigate("/login");
             return;
         }
-
+        // priprema podataka za slanje na backend
         const payload = {
             korisnik_id: korisnik.id,
             ukupno,
@@ -57,7 +58,6 @@ const Checkout = () => {
                                 src={p.slika ? `http://localhost:3001/uploads/${p.slika}` : require('../picture/pD1.jpg')}
                                 alt={p.naziv}
                                 onError={(e) => {
-                                    // fallback to local placeholder if server image missing
                                     e.currentTarget.onerror = null;
                                     e.currentTarget.src = require('../picture/pD1.jpg');
                                 }}

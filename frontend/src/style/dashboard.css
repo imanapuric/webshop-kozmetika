@@ -51,9 +51,6 @@
     }
 }
 
-/* ===============================
-   HEADER
-================================ */
 .admin-header {
     display: flex;
     justify-content: space-between;
@@ -145,7 +142,6 @@
     font-weight: 600;
 }
 
-/* LOGOUT */
 .logout-btn {
     padding: 13px 28px;
     border-radius: 999px;
@@ -190,9 +186,6 @@
     transform: translateY(-1px) scale(0.98);
 }
 
-/* ===============================
-   HERO
-================================ */
 .admin-hero {
     margin-top: 40px;
     padding: 40px 44px;
@@ -259,18 +252,12 @@
     z-index: 1;
 }
 
-/* ===============================
-   MAIN CONTENT
-================================ */
 .admin-content {
     margin-top: 48px;
     position: relative;
     z-index: 5;
 }
 
-/* ===============================
-   CARDS (ProizvodiLista koristi)
-================================ */
 .dashboard-card {
     background: rgba(255, 255, 255, 0.82);
     border: 1.5px solid rgba(255, 255, 255, 0.7);
@@ -311,9 +298,6 @@
     opacity: 1;
 }
 
-/* ===============================
-   FORMA - Dodaj novi proizvod / Uredi
-================================ */
 .dashboard-card form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -321,13 +305,11 @@
     max-width: 100%;
 }
 
-/* Opis i slika preko cijele širine */
 .dashboard-card form > *:nth-child(3),
 .dashboard-card form > *:nth-child(6) {
     grid-column: 1 / -1;
 }
 
-/* Dugme preko cijele širine */
 .dashboard-card form button[type="submit"] {
     grid-column: 1 / -1;
     justify-self: start;
@@ -481,9 +463,6 @@
     transform: translateY(-1px) scale(0.98);
 }
 
-/* ===============================
-   TABELA - Proizvodi u ponudi
-================================ */
 .dashboard-card table {
     width: 100%;
     border-collapse: separate;
@@ -579,7 +558,6 @@
     box-shadow: 0 6px 16px rgba(184, 90, 90, 0.4);
 }
 
-/* Titles */
 .section-title,
 .form-title {
     font-family: "Playfair Display", serif;
@@ -603,9 +581,6 @@
     border-radius: 2px;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
 @media (max-width: 1050px) {
     .admin-shell {
         padding: 30px;
@@ -663,15 +638,10 @@
     }
 }
 
-/* ===============================
-   FORM CARD (Dodaj/Uredi proizvod) - BRUTAL LAYOUT FIX
-================================ */
-
 .dashboard-card.form-card {
     padding: 50px 52px;
 }
 
-/* forma koristi tvoj existing class: .proizvod-form */
 .dashboard-card.form-card .proizvod-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -679,19 +649,16 @@
     margin-top: 22px;
 }
 
-/* full width elementi preko cijele forme */
 .dashboard-card.form-card .full-width {
     grid-column: 1 / -1;
 }
 
-/* svaki group */
 .dashboard-card.form-card .form-group {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* label */
 .dashboard-card.form-card .form-label {
     font-weight: 800;
     letter-spacing: 1px;
@@ -700,7 +667,6 @@
     color: rgba(75, 45, 42, 0.85);
 }
 
-/* inputs */
 .dashboard-card.form-card .form-input,
 .dashboard-card.form-card .form-select,
 .dashboard-card.form-card .form-textarea {
@@ -724,16 +690,11 @@
     transform: translateY(-1px);
 }
 
-/* opis */
 .dashboard-card.form-card .form-textarea {
     min-height: 110px;
     resize: vertical;
     line-height: 1.6;
 }
-
-/* ===============================
-   FILE INPUT PREMIUM LOOK
-================================ */
 
 .dashboard-card.form-card input[type="file"] {
     padding: 18px 20px;
@@ -769,10 +730,6 @@
     transform: scale(1.04);
 }
 
-/* ===============================
-   SUBMIT BUTTON (CENTAR & MOĆNO)
-================================ */
-
 .dashboard-card.form-card .form-actions {
     grid-column: 1 / -1;
     display: flex;
@@ -800,10 +757,6 @@
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 18px 50px rgba(107, 63, 60, 0.45);
 }
-
-/* ===============================
-   RESPONSIVE FIX
-================================ */
 
 @media (max-width: 850px) {
     .dashboard-card.form-card .proizvod-form {

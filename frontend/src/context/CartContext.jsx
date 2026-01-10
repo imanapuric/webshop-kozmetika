@@ -5,18 +5,19 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [korpa, setKorpa] = useState([]);
 
-    // učitaj korpu iz localStorage na startu
+    // učitat će korpu iz localStorage na startu
     useEffect(() => {
         const stored = localStorage.getItem("korpa");
         if (stored) setKorpa(JSON.parse(stored));
     }, []);
 
-    // svaki put kad se promijeni korpa → spremi u localStorage
+    // spremit će sadržaj korpe u localStorage kad god se promijeni
     useEffect(() => {
         localStorage.setItem("korpa", JSON.stringify(korpa));
     }, [korpa]);
 
-    // dodaj u korpu
+    // crud operacije za korpu
+
     const dodajUKorpu = (proizvod) => {
         const postoji = korpa.find((p) => p.id === proizvod.id);
 
@@ -31,12 +32,10 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // ukloni iz korpe
     const ukloniIzKorpe = (id) => {
         setKorpa(korpa.filter((p) => p.id !== id));
     };
 
-    // promijeni količinu
     const promijeniKolicinu = (id, novaKolicina) => {
         setKorpa(
             korpa.map((p) =>
@@ -45,7 +44,6 @@ export const CartProvider = ({ children }) => {
         );
     };
 
-    // očisti korpu
     const ocistiKorpu = () => setKorpa([]);
 
     return (

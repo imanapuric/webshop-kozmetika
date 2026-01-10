@@ -3,10 +3,13 @@ import api from "../services/api";
 import DodajProizvod from "./DodajProizvod";
 import "../style/dashboard.css";
 
+// komponenta za prikaz liste proizvoda u dashboardu
+
 const ProizvodiLista = () => {
     const [proizvodi, setProizvodi] = useState([]);
     const [selectedProizvod, setSelectedProizvod] = useState(null);
 
+    // funkcija učitava proizvode iz baze podataka
     const fetchProizvodi = () => {
         api
             .get("/proizvodi")
@@ -24,7 +27,7 @@ const ProizvodiLista = () => {
         api
             .delete(`/proizvodi/${id}`)
             .then(() => {
-                // ako se obrise proizvod koji je bio selektovan za edit, reset
+                // ako se obriše proizvod koji je bio selektovan za edit, reset
                 if (selectedProizvod?.id === id) setSelectedProizvod(null);
                 fetchProizvodi();
             })
@@ -33,7 +36,7 @@ const ProizvodiLista = () => {
 
     return (
         <div className="dashboard-content">
-            {/* ===== DODAJ / UREDI PROIZVOD ===== */}
+            {/* dodavanje/uređivanje */}
             <section>
                 <DodajProizvod
                     selectedProizvod={selectedProizvod}
@@ -41,7 +44,7 @@ const ProizvodiLista = () => {
                 />
             </section>
 
-            {/* ===== LISTA PROIZVODA ===== */}
+            {/* prikaz */}
             <section className="dashboard-card">
                 <h3 className="section-title">Proizvodi u ponudi</h3>
 
@@ -71,7 +74,7 @@ const ProizvodiLista = () => {
                                                 border: "1px solid rgba(0,0,0,0.08)",
                                             }}
                                             onError={(e) => {
-                                                // ako slika ne postoji na serveru, sakrij je (bez placeholdera)
+                                                // ako slika ne postoji na serveru, sakrit će se i to bez placeholdera
                                                 e.currentTarget.onerror = null;
                                                 e.currentTarget.style.display = "none";
                                             }}
