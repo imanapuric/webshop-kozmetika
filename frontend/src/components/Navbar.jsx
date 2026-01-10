@@ -12,6 +12,8 @@ import {
     FiLogOut
 } from "react-icons/fi";
 
+// komponenta za navbar
+
 const Navbar = () => {
     const navigate = useNavigate();
     const { korisnik, logout } = useAuth();
@@ -30,15 +32,14 @@ const Navbar = () => {
     return (
         <nav className="navbar">
 
-            {/* LOGO / BRAND */}
+            {/* rosea logo */}
             <Link to="/" className="brand">
                 <img src={logo} alt="Roséa logo" className="brand-logo" />
             </Link>
 
-            {/* DESNA STRANA */}
+            {/* sadržaj desne strane navbara ovisit će o ulozi */}
             <div className="nav-right">
 
-                {/* LINKOVI */}
                 <div className="nav-links">
 
                     {korisnik && korisnik.uloga === "ADMIN" && (
@@ -82,7 +83,7 @@ const Navbar = () => {
                     )}
                 </div>
 
-                {/* LOGOUT */}
+                {/* dugme za odjavu ; neovisno o ulozi */}
                 {korisnik && (
                     <button
                         onClick={handleLogout}

@@ -46,7 +46,6 @@ const Korpa = () => {
                 </div>
             ) : (
                 <div className="korpa-grid">
-                    {/* LEFT: items */}
                     <div className="korpa-items">
                         {korpa.map((p) => (
                             <div key={p.id} className="cart-item">
@@ -103,12 +102,12 @@ const Korpa = () => {
                         ))}
                     </div>
 
-                    {/* RIGHT: summary */}
+                    {/* desna kartica */}
                     <aside className="korpa-summary">
                         <h3>Sažetak narudžbe</h3>
 
                         <div className="summary-row">
-                            <span>Međuzbroj</span>
+                            <span>Ukupno (bez dostave)</span>
                             <strong>{ukupno.toFixed(2)} KM</strong>
                         </div>
 

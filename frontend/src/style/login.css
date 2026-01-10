@@ -6,7 +6,6 @@
     box-sizing: border-box;
 }
 
-/* ANIMATED BACKGROUND */
 .login-wrapper {
     position: relative;
     min-height: 100vh;
@@ -19,7 +18,6 @@
     overflow: hidden;
 }
 
-/* Floating particles effect */
 .login-wrapper::before {
     content: '';
     position: absolute;
@@ -40,7 +38,6 @@
     66% { transform: translate(-20px, 20px); }
 }
 
-/* MAIN CARD */
 .login-box {
     position: relative;
     width: 920px;
@@ -69,7 +66,6 @@
     }
 }
 
-/* LEFT IMAGE */
 .login-image {
     flex: 1;
     position: relative;
@@ -99,7 +95,6 @@
     transform: scale(1.05);
 }
 
-/* RIGHT FORM */
 .login-form {
     flex: 1;
     padding: 60px 56px;
@@ -109,7 +104,6 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
 }
 
-/* TITLE */
 .login-form h2 {
     font-family: "Playfair Display", serif;
     font-size: 48px;
@@ -132,7 +126,6 @@
     border-radius: 2px;
 }
 
-/* LABELS */
 .login-form label {
     font-size: 11px;
     font-weight: 600;
@@ -144,7 +137,6 @@
     transition: color 0.3s ease;
 }
 
-/* INPUTS */
 .login-form input {
     width: 100%;
     padding: 16px 18px;
@@ -163,13 +155,11 @@
     color: rgba(63, 47, 45, 0.5);
 }
 
-/* INPUT HOVER */
 .login-form input:hover {
     border-color: rgba(201, 128, 126, 0.4);
     background: rgba(255, 255, 255, 0.85);
 }
 
-/* INPUT FOCUS */
 .login-form input:focus {
     border-color: #c9807e;
     box-shadow:
@@ -179,7 +169,6 @@
     transform: translateY(-2px);
 }
 
-/* AUTOFILL FIX */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
@@ -188,7 +177,6 @@ input:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-/* BUTTON */
 .login-form button {
     margin-top: 20px;
     padding: 16px 24px;
@@ -236,7 +224,6 @@ input:-webkit-autofill:focus {
     transform: translateY(-1px);
 }
 
-/* ERROR */
 .error {
     background: rgba(184, 74, 74, 0.15);
     color: #b84a4a;
@@ -254,9 +241,9 @@ input:-webkit-autofill:focus {
     75% { transform: translateX(8px); }
 }
 
-/* SWITCH */
+
 .auth-switch a {
-    color: #c9807e; /* nježna roza – u skladu s dugmetom */
+    color: #c9807e;
 }
 
 .auth-switch a::after {
@@ -275,8 +262,6 @@ input:-webkit-autofill:focus {
     color: #a06361 !important;
 }
 
-
-/* RESPONSIVE */
 @media (max-width: 850px) {
     .login-box {
         flex-direction: column;

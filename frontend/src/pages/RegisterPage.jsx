@@ -39,12 +39,10 @@ const RegisterPage = () => {
         <div className="register-wrapper">
             <div className="register-box">
 
-                {/* LEFT IMAGE */}
                 <div className="register-image">
                     <img src={require("../picture/flower.jpg")} alt="Register visual" />
                 </div>
 
-                {/* RIGHT FORM */}
                 <div className="register-form">
                     <h2>Registracija</h2>
 
@@ -87,8 +85,8 @@ const RegisterPage = () => {
                             onChange={(e) => setConfirm(e.target.value)}
                             required
                         />
-
-                        <label>Tip Naloga</label>
+                        {/* ovaj dio očito nije siguran za real world projekat, ali ovdje može poslužiti */}
+                        <label>Tip računa</label>
                         <select value={uloga} onChange={(e) => setUloga(e.target.value)}>
                             <option value="KORISNIK">Korisnik</option>
                             <option value="ADMIN">Administrator</option>

@@ -21,7 +21,6 @@
     color: #2a1d1c;
 }
 
-/* HEADER */
 .narudzbe-header {
     margin-bottom: 32px;
 }
@@ -44,7 +43,6 @@
     line-height: 1.7;
 }
 
-/* CARD */
 .narudzbe-card {
     background: rgba(255, 255, 255, 0.82);
     border: 1.5px solid rgba(255, 255, 255, 0.7);
@@ -58,7 +56,6 @@
     margin-bottom: 38px;
 }
 
-/* SECTION TITLE */
 .section-title {
     font-family: "Playfair Display", serif;
     font-size: 28px;
@@ -88,7 +85,6 @@
     border-radius: 2px;
 }
 
-/* TABLE */
 .table-wrapper {
     overflow: hidden;
     border-radius: 18px;
@@ -150,7 +146,6 @@
     font-weight: 700;
 }
 
-/* STATUS BOX */
 .status-box {
     display: flex;
     align-items: center;
@@ -172,7 +167,6 @@
     border-color: rgba(107, 63, 60, 0.28);
 }
 
-/* BUTTONS */
 .btn-save {
     padding: 10px 16px;
     border-radius: 12px;
@@ -210,14 +204,12 @@
     transform: translateY(-1px);
 }
 
-/* EMPTY ROW */
 .empty-row {
     text-align: center;
     padding: 24px;
     color: rgba(75, 45, 42, 0.6);
 }
 
-/* DETAILS CARD */
 .details-card {
     animation: fadeIn 0.35s ease;
 }
@@ -227,7 +219,6 @@
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE */
 @media (max-width: 1000px) {
     .narudzbe-shell {
         padding: 28px;

@@ -16,6 +16,7 @@ const LoginPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // preusmjeravanje korisnika ovisno o ulozi nakon uspješne prijave
         api.post("/auth/login", { email, lozinka })
             .then((res) => {
                 login(res.data.korisnik);
@@ -32,12 +33,10 @@ const LoginPage = () => {
         <div className="login-wrapper">
             <div className="login-box">
 
-                {/* LEFT IMAGE */}
                 <div className="login-image">
                     <img src={require("../picture/flower.jpg")} alt="Login visual" />
                 </div>
 
-                {/* RIGHT FORM */}
                 <div className="login-form">
                     <h2>Prijava</h2>
 

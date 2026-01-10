@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import "../style/dashboard.css";
 
+// komponenta za formu za dodavanje i uređivanje proizvoda
+
 const DodajProizvod = ({ selectedProizvod, refresh }) => {
     const [kategorije, setKategorije] = useState([]);
 
@@ -14,12 +16,14 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
         slika: null
     });
 
+    // učitavanje kategorija iz baze podataka
     useEffect(() => {
         api.get("/kategorije")
             .then(res => setKategorije(res.data))
             .catch(err => console.error(err));
     }, []);
 
+    // popunjavanje forme već postojećim podacima odabranog proizvoda za uređivanje
     useEffect(() => {
         if (selectedProizvod) {
             setFormData({
@@ -33,14 +37,16 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
         }
     }, [selectedProizvod]);
 
+    // ova funkcija će postaviti promjene u formi
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
+    // ovim se mijenja slika proizvoda
     const handleFileChange = (e) => {
         setFormData({ ...formData, slika: e.target.files[0] });
     };
 
+    // funkcija za slanje podataka iz forme na backend
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -82,7 +88,7 @@ const DodajProizvod = ({ selectedProizvod, refresh }) => {
             alert("Greška pri dodavanju proizvoda!");
         }
     };
-
+    // html kod za formu
     return (
         <div className="dashboard-card form-card">
             <h2 className="form-title">

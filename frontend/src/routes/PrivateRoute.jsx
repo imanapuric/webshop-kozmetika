@@ -4,12 +4,11 @@ import { useAuth } from "../context/AuthContext";
 const PrivateRoute = ({ children, adminOnly = false }) => {
     const { korisnik } = useAuth();
 
-    // nije ulogovan
+    // login uvijek ako nije korisnik prijavljen
     if (!korisnik) {
         return <Navigate to="/login" />;
     }
-
-    // samo admin smije
+    // ako je ruta samo za admina, a korisnik nije admin, preusmjerava se na shop page
     if (adminOnly && korisnik.uloga !== "ADMIN") {
         return <Navigate to="/shop" />;
     }

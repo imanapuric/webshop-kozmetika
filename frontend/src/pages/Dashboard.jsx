@@ -13,7 +13,6 @@ const Dashboard = () => {
 
     return (
         <div className="admin-shell">
-            {/* TOP HEADER */}
             <header className="admin-header">
                 <div className="header-left">
                     <h1 className="header-logo">Roséa</h1>
@@ -30,7 +29,6 @@ const Dashboard = () => {
                 </div>
             </header>
 
-            {/* HERO */}
             <section className="admin-hero">
                 <h2>
                     Dobrodošla nazad, <span>{korisnik?.ime}</span>
@@ -40,7 +38,6 @@ const Dashboard = () => {
                 </p>
             </section>
 
-            {/* MAIN CONTENT */}
             <main className="admin-content">
                 <ProizvodiLista />
             </main>

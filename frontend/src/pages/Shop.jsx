@@ -37,7 +37,6 @@ const Shop = () => {
                 </div>
             </section>
 
-            {/* PRODUCTS */}
             <section className="products-section">
                 <h2 className="section-title">Naši proizvodi</h2>
 
@@ -100,7 +99,6 @@ const Shop = () => {
                         </span>
                     </div>
 
-                    {/* RIGHT IMAGE */}
                     <div className="about-image">
                         <img src={oNamaImg} alt="O nama" />
                     </div>
@@ -108,7 +106,6 @@ const Shop = () => {
                 </div>
             </section>
 
-            {/* FOOTER */}
             <footer className="shop-footer">
                 <div className="footer-inner">
 

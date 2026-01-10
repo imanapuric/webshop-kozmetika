@@ -37,7 +37,7 @@ const Narudzbe = () => {
     const sacuvajStatus = (id) => {
         api.put(`/narudzbe/${id}/status`, { status: statusMap[id] })
             .then(() => {
-                alert("Status ažuriran ✅");
+                alert("Status uspješno ažuriran.");
                 fetchNarudzbe();
             })
             .catch(err => {
@@ -49,13 +49,11 @@ const Narudzbe = () => {
     return (
         <div className="narudzbe-shell">
 
-            {/* HEADER */}
             <div className="narudzbe-header">
                 <h1>Narudžbe</h1>
                 <p>Pregled svih narudžbi i upravljanje statusima.</p>
             </div>
 
-            {/* LISTA NARUDŽBI */}
             <section className="narudzbe-card">
                 <h2 className="section-title">Sve narudžbe</h2>
 
@@ -82,7 +80,6 @@ const Narudzbe = () => {
                                 <td className="email-col">{n.korisnik_email}</td>
                                 <td className="price-col">{Number(n.ukupno).toFixed(2)} KM</td>
 
-                                {/* STATUS */}
                                 <td>
                                     <div className="status-box">
                                         <select
@@ -131,7 +128,6 @@ const Narudzbe = () => {
                 </div>
             </section>
 
-            {/* STAVKE */}
             {selectedId && (
                 <section className="narudzbe-card details-card">
                     <h2 className="section-title">
