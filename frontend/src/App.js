@@ -19,14 +19,12 @@ function AppContent() {
 
     return (
         <>
-            {/*sakrivanje navbara u login i register page jer nije potreban*/}
+            {/*sakrit će navbar u login i register page jer nije potreban*/}
             {location.pathname !== "/login" && location.pathname !== "/register" && <Navbar />}
 
             <Routes>
-                {/* redirect */}
                 <Route path="/" element={<Navigate to="/login" />} />
 
-                {/* login */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
@@ -68,7 +66,7 @@ function AppContent() {
                     }
                 />
 
-                {/* fallback */}
+                {/* error page */}
                 <Route path="*" element={<h2 style={{ padding: "20px" }}>404 - Nema stranice</h2>} />
             </Routes>
         </>

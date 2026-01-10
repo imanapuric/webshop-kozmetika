@@ -38,7 +38,6 @@ const MojeNarudzbe = () => {
             <h1>Moje narudžbe</h1>
             <p className="subtitle">Pregled vaših prethodnih kupovina</p>
 
-            {/* ===== NARUDŽBE ===== */}
             <div className="narudzbe-card">
                 <table className="narudzbe-table">
                     <thead>
@@ -73,7 +72,6 @@ const MojeNarudzbe = () => {
                 </table>
             </div>
 
-            {/* ===== STAVKE ===== */}
             {selectedId && (
                 <div className="stavke-card">
                     <h2>Stavke narudžbe {selectedId}</h2>

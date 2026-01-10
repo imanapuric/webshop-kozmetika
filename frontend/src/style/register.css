@@ -6,7 +6,6 @@
     box-sizing: border-box;
 }
 
-/* ANIMATED BACKGROUND */
 .register-wrapper {
     position: relative;
     min-height: 100vh;
@@ -19,7 +18,6 @@
     overflow: hidden;
 }
 
-/* Floating particles effect */
 .register-wrapper::before {
     content: '';
     position: absolute;
@@ -40,7 +38,6 @@
     66% { transform: translate(-20px, 20px); }
 }
 
-/* MAIN CARD */
 .register-box {
     position: relative;
     width: 920px;
@@ -69,7 +66,6 @@
     }
 }
 
-/* LEFT IMAGE */
 .register-image {
     flex: 1;
     position: relative;
@@ -99,7 +95,6 @@
     transform: scale(1.05);
 }
 
-/* RIGHT FORM */
 .register-form {
     flex: 1;
     padding: 50px 56px;
@@ -110,7 +105,6 @@
     overflow-y: auto;
 }
 
-/* TITLE */
 .register-form h2 {
     font-family: "Playfair Display", serif;
     font-size: 48px;
@@ -133,7 +127,6 @@
     border-radius: 2px;
 }
 
-/* LABELS */
 .register-form label {
     font-size: 11px;
     font-weight: 600;
@@ -145,7 +138,7 @@
     transition: color 0.3s ease;
 }
 
-/* INPUTS */
+
 .register-form input {
     width: 100%;
     padding: 14px 18px;
@@ -164,13 +157,11 @@
     color: rgba(47, 63, 63, 0.5);
 }
 
-/* INPUT HOVER */
 .register-form input:hover {
     border-color: rgba(126, 181, 201, 0.4);
     background: rgba(255, 255, 255, 0.85);
 }
 
-/* INPUT FOCUS */
 .register-form input:focus {
     border-color: #7eb5c9;
     box-shadow:
@@ -180,7 +171,6 @@
     transform: translateY(-2px);
 }
 
-/* SELECT DROPDOWN */
 .register-form select {
     width: 100%;
     padding: 14px 18px;
@@ -217,7 +207,6 @@
     transform: translateY(-2px);
 }
 
-/* AUTOFILL FIX */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
@@ -226,7 +215,6 @@ input:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-/* BUTTON */
 .register-form button {
     margin-top: 16px;
     padding: 16px 24px;
@@ -279,7 +267,6 @@ input:-webkit-autofill:focus {
     cursor: not-allowed;
 }
 
-/* ERROR */
 .error {
     background: rgba(184, 74, 74, 0.15);
     color: #b84a4a;
@@ -297,7 +284,6 @@ input:-webkit-autofill:focus {
     75% { transform: translateX(8px); }
 }
 
-/* SWITCH */
 .auth-switch {
     margin-top: 24px;
     font-size: 14px;
@@ -332,7 +318,6 @@ input:-webkit-autofill:focus {
     width: 100%;
 }
 
-/* RESPONSIVE */
 @media (max-width: 850px) {
     .register-box {
         flex-direction: column;
