@@ -21,7 +21,7 @@
     color: #2a1d1c;
 }
 
-/* HEADER */
+/* heder */
 .narudzbe-header {
     margin-bottom: 32px;
 }
@@ -44,7 +44,7 @@
     line-height: 1.7;
 }
 
-/* CARD */
+/* card */
 .narudzbe-card {
     background: rgba(255, 255, 255, 0.82);
     border: 1.5px solid rgba(255, 255, 255, 0.7);
@@ -58,7 +58,7 @@
     margin-bottom: 38px;
 }
 
-/* SECTION TITLE */
+/* section */
 .section-title {
     font-family: "Playfair Display", serif;
     font-size: 28px;
@@ -88,7 +88,7 @@
     border-radius: 2px;
 }
 
-/* TABLE */
+/* tabela */
 .table-wrapper {
     overflow: hidden;
     border-radius: 18px;
@@ -130,7 +130,7 @@
     background: rgba(169, 119, 114, 0.12);
 }
 
-/* COLUMN STYLES */
+/* stil kolona */
 .id-col {
     font-weight: 800;
     color: #4b2d2a;
@@ -150,7 +150,7 @@
     font-weight: 700;
 }
 
-/* STATUS BOX */
+/* status box */
 .status-box {
     display: flex;
     align-items: center;
@@ -172,7 +172,7 @@
     border-color: rgba(107, 63, 60, 0.28);
 }
 
-/* BUTTONS */
+/* dugmici */
 .btn-save {
     padding: 10px 16px;
     border-radius: 12px;

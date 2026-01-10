@@ -83,7 +83,6 @@ exports.create = (req, res) => {
 /*
  ADMIN ,,, promjena statusa
  PUT /api/narudzbe/:id
- body: { status, uloga }
  */
 exports.updateStatus = (req, res) => {
     const narudzba_id = req.params.id;

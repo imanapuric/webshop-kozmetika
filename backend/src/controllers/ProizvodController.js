@@ -32,7 +32,6 @@ exports.update = (req, res) => {
     });
 };
 
-// malo detaljnije za debugging jer mi obicni zahtjev daje error 500 bez detalja
 exports.delete = (req, res) => {
     const id = req.params.id || req.body.id;
 

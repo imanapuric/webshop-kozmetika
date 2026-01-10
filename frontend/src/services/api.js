@@ -6,7 +6,7 @@ const api = axios.create({
         'Content-Type': 'application/json'
     }
 });
-// interceptor će sesiji dodijeliti header sa ulogom korisnika,, kako bi backend mogao da razlikuje privilegije
+// interceptor će sesiji dodijeliti header sa ulogom korisnika, kako bi backend mogao da razlikuje privilegije
 api.interceptors.request.use((config) => {
     try {
         const stored = localStorage.getItem('korisnik');
